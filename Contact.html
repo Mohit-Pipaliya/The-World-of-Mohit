@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mohit Pipaliya</title>
+  <meta name="description" content="Get in touch with Mohit Pipaliya — Game Developer." />
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+
+<body id="contact-page">
+
+  <!-- NAVIGATION -->
+  <nav id="top-nav">
+    <div class="nav-inner">
+      <span class="nav-logo">MOHIT PIPALIYA<span class="logo-dot">.</span></span>
+      <ul id="nav-list">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About Me</a></li>
+        <li><a href="index.html#tech-skills" class="nav-link">Technical Skills</a></li>
+        <li><a href="index.html#soft-skills" class="nav-link">Soft Skills</a></li>
+        <li><a href="index.html#education" class="nav-link">Education</a></li>
+        <li><a href="Project.html" class="nav-link">Projects</a></li>
+        <li><a href="index.html#achievements" class="nav-link">Achievements</a></li>
+        <li><a href="index.html#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="Contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact-wrapper">
+    <div class="contact-bg"></div>
+    <canvas id="contact-stars-canvas"></canvas>
+
+    <div class="contact-container">
+
+      <!-- ── STEP 1: INITIAL PROMPT ── -->
+      <div id="contact-initial-view" class="contact-view">
+        <div class="contact-heading-wrap">
+          <h1 class="contact-heading" data-text="Contact Me">Contact Me</h1>
+        </div>
+        <p class="contact-subtitle">Play a quick game to unlock my contact 😄</p>
+
+        <div class="contact-btn-group">
+          <button id="btn-play-game" class="contact-btn cta-primary">
+            <i class="fa-solid fa-gamepad"></i>
+            <span class="btn-text">Play Game 🎮</span>
+            <div class="btn-glow"></div>
+          </button>
+          <button id="btn-skip-game" class="contact-btn cta-secondary">
+            <span class="btn-text">Skip ⏭</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: GAME VIEW ── -->
+      <div id="contact-game-view" class="contact-view" style="display:none; opacity:0;">
+
+        <!-- ── GAME CONTROLS BAR ── -->
+        <div class="game-controls-bar">
+          <div class="game-controls-left">
+            <span class="game-controls-title"><i class="fa-solid fa-gamepad"></i> Catch Me!</span>
+          </div>
+          <div class="game-controls-right">
+            <!-- Skip: jump straight to contact info -->
+            <button id="btn-game-skip" class="game-ctrl-btn game-ctrl-skip" title="Skip game — show contact directly">
+              <i class="fa-solid fa-forward-fast"></i>
+              <span>Skip</span>
+            </button>
+            <!-- Close: stop game, show contact info -->
+            <button id="btn-game-close" class="game-ctrl-btn game-ctrl-close" title="Close game — show contact info">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Score HUD -->
+        <div class="game-hud">
+          <span class="game-hud-label">SCORE</span>
+          <div class="game-score-wrap">
+            <span id="game-score-current">0</span>
+            <span class="game-score-divider">/</span>
+            <span class="game-score-total">5</span>
+          </div>
+          <div class="game-score-bar">
+            <div id="game-score-bar-fill" class="game-score-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Game Arena -->
+        <div id="game-arena">
+          <!-- Avatar - the clickable target -->
+          <div id="game-avatar">
+            <img src="Game/Game image.jpeg" alt="Catch me!" draggable="false" />
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring2"></div>
+          </div>
+
+          <!-- Win message (hidden initially) -->
+          <div id="game-win-msg">
+            <div class="win-emoji">🎉</div>
+            <p class="win-text">You caught me!</p>
+          </div>
+        </div>
+
+        <!-- Instruction -->
+        <p class="game-instruction">Click the avatar <strong>5 times</strong> to unlock my contact info!</p>
+      </div>
+
+      <!-- ── STEP 3: CONTACT DETAILS ── -->
+      <div id="contact-details-view" class="contact-view" style="display:none; opacity:0;">
+        <div class="contact-unlocked-badge">🔓 Contact Unlocked</div>
+        <h2 class="contact-details-heading">Let's Connect!</h2>
+        <p class="contact-details-sub">I'm always open to new opportunities, collaborations, or just a good game jam chat.</p>
+
+        <div class="contact-info-grid">
+          <!-- 1. Phone -->
+          <a href="tel:7990197880" class="contact-info-card" id="card-phone">
+            <div class="contact-info-icon phone-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Phone</span>
+              <span class="info-value">+91 79901 97880</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 2. Email -->
+          <a href="mailto:mohitpipaliya248@gmail.com" class="contact-info-card" id="card-email">
+            <div class="contact-info-icon email-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Email</span>
+              <span class="info-value">mohitpipaliya248@gmail.com</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 3. WhatsApp -->
+          <a href="https://wa.me/7990197880" target="_blank" class="contact-info-card" id="card-whatsapp">
+            <div class="contact-info-icon whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">WhatsApp</span>
+              <span class="info-value">Message Me</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 4. LinkedIn -->
+          <a href="https://www.linkedin.com/in/mohitpipalya248" target="_blank" class="contact-info-card" id="card-linkedin">
+            <div class="contact-info-icon linkedin-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">LinkedIn</span>
+              <span class="info-value">mohitpipalya248</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 5. Instagram -->
+          <a href="https://www.instagram.com/mohit_pipaliya_248/" target="_blank" class="contact-info-card" id="card-instagram">
+            <div class="contact-info-icon insta-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Instagram</span>
+              <span class="info-value">@mohit_pipaliya_248</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 6. Location -->
+          <div class="contact-info-card" id="card-location" style="cursor: default;">
+            <div class="contact-info-icon location-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Location</span>
+              <span class="info-value">Pardi, Valaad</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback-form-container">
+          <h3 class="feedback-heading">Send a Message</h3>
+          <form id="contact-feedback-form" class="feedback-form">
+            
+            <div class="input-group">
+              <input type="text" id="fb-name" required placeholder=" " />
+              <label for="fb-name">Full Name</label>
+              <div class="input-glow"></div>
+            </div>
+
+            <div class="input-group">
+              <input type="email" id="fb-email" required placeholder=" " />
+              <label for="fb-email">Email</label>
+              <div class="input-glow"></div>
+            </div>
+
+            <div class="input-group">
+              <select id="fb-reason" required>
+                <option value="" disabled selected hidden></option>
+                <option value="general">General Feedback</option>
+                <option value="job">Job Opportunity</option>
+                <option value="academic">Academic Question</option>
+                <option value="other">Other</option>
+              </select>
+              <label for="fb-reason">Reason</label>
+              <div class="input-glow"></div>
+            </div>
+
+            <div class="input-group">
+              <textarea id="fb-message" rows="4" required placeholder=" "></textarea>
+              <label for="fb-message">Message</label>
+              <div class="input-glow"></div>
+            </div>
+
+            <button type="submit" id="btn-submit-feedback" class="contact-btn cta-primary submit-btn">
+              <span class="btn-text">Send Message <i class="fa-regular fa-paper-plane"></i></span>
+              <div class="btn-glow"></div>
+            </button>
+          </form>
+        </div>
+
+        <button id="btn-play-again" class="contact-btn cta-secondary" style="margin-top: 2rem;">
+          <span class="btn-text">Play Again 🔁</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+
+    </div><!-- /.contact-container -->
+  </section>
+
+  <script src="contact-script.js"></script>
+</body>
+</html>

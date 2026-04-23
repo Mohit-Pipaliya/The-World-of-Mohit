@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soft Skills - Ultra Max</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* Base Resets */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #050810;
+      color: #fff;
+      font-family: 'Exo 2', sans-serif;
+      overflow-x: hidden;
+    }
+
+    #soft-skills {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      padding: 120px 20px 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .soft-bg-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(96,165,250,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      z-index: 1;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00ffff, transparent);
+      margin: 15px auto 0;
+      box-shadow: 0 0 15px #00ffff;
+    }
+
+    .section-subtitle {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(96,165,250,0.6);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 5rem;
+      z-index: 1;
+    }
+
+    .soft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Row 2: center the 2 cards */
+    .soft-grid .soft-card:nth-child(4),
+    .soft-grid .soft-card:nth-child(5) {
+      grid-row: 2;
+    }
+    .soft-grid .soft-card:nth-child(4) { grid-column: 1 / 2; }
+    .soft-grid .soft-card:nth-child(5) { grid-column: 2 / 3; }
+
+    /* Override to center the 2-card row */
+    .soft-row-2 {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+    }
+    .soft-row-2 .soft-card {
+      width: calc(33.333% - 0.75rem);
+    }
+
+    .soft-card {
+      position: relative;
+      width: 100%;
+      background: rgba(10, 15, 24, 0.7);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 30px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+      backdrop-filter: blur(12px);
+      opacity: 1;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+
+    .card-border {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, #60a5fa, #d946ef) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .soft-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(96,165,250,0.4);
+      border-color: transparent;
+      z-index: 5;
+    }
+    .soft-card:hover .card-border {
+      opacity: 1;
+    }
+
+    .soft-icon {
+      font-size: 3rem;
+      color: #60a5fa;
+      text-shadow: 0 0 15px #60a5fa;
+      transition: transform 0.4s ease, color 0.4s ease, text-shadow 0.4s ease;
+    }
+
+    .soft-card:hover .soft-icon {
+      transform: scale(1.1) translateY(-5px);
+      color: #d946ef;
+      text-shadow: 0 0 25px #d946ef;
+    }
+
+    .soft-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .soft-desc {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+    
+    @media(max-width: 992px) {
+      .soft-grid { grid-template-columns: repeat(2, 1fr); }
+      .soft-row-2 .soft-card { width: calc(50% - 0.75rem); }
+    }
+    @media(max-width: 576px) {
+      .soft-grid { grid-template-columns: 1fr; }
+      .soft-row-2 { flex-direction: column; }
+      .soft-row-2 .soft-card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="soft-skills">
+    <div class="soft-bg-glow"></div>
+    <h2 class="section-title reveal-elem title-rev">Soft Skills</h2>
+    <p class="section-subtitle reveal-elem sub-rev">[ Behavioral Competencies ]</p>
+    
+    <!-- Row 1: 3 cards — slide left → right -->
+    <div class="soft-grid" id="soft-row1">
+      
+      <div class="soft-card row1-card">
+        <div class="card-border"></div>
+        <i class="fa-solid fa-lightbulb soft-icon"></i>
+        <h3 class="soft-title">Creativity</h3>
+        <p class="soft-desc">Designing unique gameplay ideas and engaging puzzle mechanics.</p>
+      </div>
+
+      <div class="soft-card row1-card">
+        <div class="card-border"></div>
+        <i class="fa-solid fa-puzzle-piece soft-icon"></i>
+        <h3 class="soft-title">Problem Solving</h3>
+        <p class="soft-desc">Building logical systems and solving gameplay challenges.</p>
+      </div>
+
+      <div class="soft-card row1-card">
+        <div class="card-border"></div>
+        <i class="fa-solid fa-users soft-icon"></i>
+        <h3 class="soft-title">Teamwork</h3>
+        <p class="soft-desc">Collaborating effectively in team-based projects and game jams.</p>
+      </div>
+
+    </div>
+
+    <!-- Row 2: 2 cards — slide right → left -->
+    <div class="soft-row-2" id="soft-row2" style="margin-top:1.5rem;">
+
+      <div class="soft-card row2-card">
+        <div class="card-border"></div>
+        <i class="fa-solid fa-chess-king soft-icon"></i>
+        <h3 class="soft-title">Leadership</h3>
+        <p class="soft-desc">Taking initiative and guiding development decisions.</p>
+      </div>
+
+      <div class="soft-card row2-card">
+        <div class="card-border"></div>
+        <i class="fa-solid fa-comments soft-icon"></i>
+        <h3 class="soft-title">Communication</h3>
+        <p class="soft-desc">Clearly expressing ideas and working efficiently with others.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+</body>
+</html>

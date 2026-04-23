@@ -1,0 +1,940 @@
+/* ═══════════════════════════════════════════════════════════
+   CINEMATIC OVERRIDE — ANCIENT STONE & WOOD THEME (OPTIMISED)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. TOKEN OVERRIDE ───────────────────────────────────── */
+:root {
+  --cin-gold: #e8b059;
+  --cin-brown: #8b5a2b;
+  --cin-dark: #5c3a21;
+  --cin-cave: #0a0806;
+  --cin-stone: #dfd3c3;
+  --cin-aged: #eae0d5;
+
+  /* Override base palette */
+  --cyan: #e8b059;
+  --white: #eae0d5;
+  --dark: #0a0806;
+  --primary-glow: rgba(232, 176, 89, 0.4);
+}
+
+/* ── 2. BASE ─────────────────────────────────────────────── */
+body {
+  background-color: var(--cin-cave) !important;
+  color: var(--cin-aged) !important;
+}
+
+/* ── 3. NAVBAR ───────────────────────────────────────────── */
+#top-nav {
+  background-color: rgba(20, 15, 10, 0.82) !important;
+  background-image: none !important;
+  border: 1px solid #3a2a18 !important;
+  border-left: 4px solid var(--cin-brown) !important;
+  border-right: 4px solid var(--cin-brown) !important;
+  border-radius: 2px !important;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.7),
+    0 10px 40px rgba(0, 0, 0, 0.85),
+    0 0 12px rgba(232, 176, 89, 0.08) !important;
+}
+
+#top-nav::before,
+#top-nav::after {
+  background: var(--cin-gold) !important;
+  box-shadow: 0 0 10px var(--cin-gold) !important;
+}
+
+.nav-toggle-btn .bar {
+  background-color: var(--cin-stone) !important;
+  box-shadow: 0 0 10px rgba(232, 176, 89, 0.4) !important;
+}
+
+/* ── 4. FOG CONTAINER (injected by JS) ───────────────────── */
+#cinematic-fog-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  /* Isolate compositing so it stays on its own layer */
+  will-change: transform;
+  contain: strict;
+}
+
+.cinematic-fog,
+.cinematic-fog-2 {
+  position: absolute;
+  width: 300%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  opacity: 0;
+  /* faded in via JS after load */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Pure CSS gradient fog — no external PNG dependency, zero network cost */
+.cinematic-fog {
+  background: repeating-linear-gradient(90deg,
+      transparent 0%,
+      rgba(232, 176, 89, 0.04) 20%,
+      transparent 40%);
+  animation: fogMove 70s linear infinite;
+  opacity: 0.9;
+}
+
+.cinematic-fog-2 {
+  background: repeating-linear-gradient(90deg,
+      transparent 0%,
+      rgba(180, 130, 60, 0.03) 30%,
+      transparent 60%);
+  animation: fogMove 45s linear infinite reverse;
+  opacity: 0.6;
+}
+
+@keyframes fogMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(33.33%, 0, 0);
+  }
+}
+
+/* ── 5. HOME ─────────────────────────────────────────────── */
+#parallax-bg {
+  background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=60&w=1600&auto=format&fit=crop') !important;
+  background-attachment: scroll !important;
+  /* scroll = GPU composited */
+  filter: brightness(0.3) contrast(1.4) sepia(0.6) hue-rotate(-20deg) saturate(1.5) !important;
+}
+
+#vignette {
+  background: radial-gradient(circle at center, transparent 10%, rgba(5, 3, 0, 0.95) 100%) !important;
+}
+
+/* ── 6. TYPOGRAPHY ───────────────────────────────────────── */
+h1,
+h2,
+h3 {
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(232, 176, 89, 0.25) !important;
+  color: var(--cin-stone) !important;
+}
+
+/* Section title already targeted by h2 above; fine-grain override */
+.section-title {
+  color: var(--cin-stone) !important;
+}
+
+.section-title::after {
+  background: linear-gradient(90deg, var(--cin-gold), var(--cin-dark)) !important;
+  box-shadow: 0 0 12px var(--cin-gold) !important;
+}
+
+.title-accent,
+.highlight,
+.logo-dot {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 18px var(--cin-gold), 0 0 36px rgba(232, 176, 89, 0.35) !important;
+}
+
+.highlight {
+  border-bottom-color: rgba(232, 176, 89, 0.35) !important;
+}
+
+/* Nav links */
+.nav-link:hover {
+  color: var(--cin-gold) !important;
+  border-bottom-color: var(--cin-gold) !important;
+  text-shadow: 0 0 12px rgba(232, 176, 89, 0.7) !important;
+}
+
+/* ── 7. ABOUT ────────────────────────────────────────────── */
+#about {
+  background:
+    radial-gradient(circle at 30% 50%, rgba(232, 176, 89, 0.04), transparent 55%),
+    linear-gradient(to bottom, rgba(10, 8, 5, 0.94), rgba(10, 8, 5, 0.88)),
+    url('https://images.unsplash.com/photo-1507692049790-de58290a4334?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.about-text p {
+  background: rgba(30, 20, 10, 0.55) !important;
+  border-left: 3px solid var(--cin-brown) !important;
+  border-radius: 2px !important;
+}
+
+.stat-orb {
+  background: rgba(20, 15, 10, 0.78) !important;
+  border-color: var(--cin-dark) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), inset 0 0 12px rgba(232, 176, 89, 0.08) !important;
+}
+
+.stat-orb:hover {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(232, 176, 89, 0.22) !important;
+}
+
+/* Orb glow — all variants unified */
+.orb-glow,
+.stat-cyan .orb-glow,
+.stat-purple .orb-glow,
+.stat-gold .orb-glow {
+  background: radial-gradient(circle, rgba(232, 176, 89, 0.35) 0%, transparent 70%) !important;
+}
+
+/* Icon/number colour unified */
+.stat-icon,
+.stat-number,
+.stat-cyan .stat-icon,
+.stat-cyan .stat-number,
+.stat-purple .stat-icon,
+.stat-purple .stat-number,
+.stat-gold .stat-icon,
+.stat-gold .stat-number {
+  color: var(--cin-stone) !important;
+  text-shadow: 0 0 8px rgba(232, 176, 89, 0.45) !important;
+}
+
+/* Orb border colour unified */
+.stat-cyan,
+.stat-purple,
+.stat-gold {
+  border-color: var(--cin-dark) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85) !important;
+}
+
+.stat-cyan:hover,
+.stat-purple:hover,
+.stat-gold:hover {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(232, 176, 89, 0.22) !important;
+}
+
+.img-glow-ring {
+  background: conic-gradient(var(--cin-brown) 0deg, var(--cin-gold) 90deg, var(--cin-dark) 180deg, var(--cin-gold) 360deg) !important;
+}
+
+.orbit-unity {
+  border-color: var(--cin-gold) !important;
+  color: var(--cin-gold) !important;
+  box-shadow: 0 0 16px var(--cin-gold) !important;
+}
+
+/* ── 8. TECH SKILLS ──────────────────────────────────────── */
+#tech-skills {
+  background:
+    radial-gradient(circle at 50% 80%, rgba(200, 80, 0, 0.08), transparent 65%),
+    linear-gradient(to bottom, rgba(5, 3, 0, 0.94), rgba(15, 10, 5, 0.88)),
+    url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+/* Force all hud-nodes to torch-gold via the custom property */
+.hud-node {
+  --theme-color: var(--cin-gold) !important;
+}
+
+.hud-ring-outer {
+  border-color: rgba(139, 90, 43, 0.35) !important;
+}
+
+.hud-ring-dashed {
+  border-color: rgba(232, 176, 89, 0.25) !important;
+}
+
+.hud-progress-fill {
+  stroke: var(--cin-gold) !important;
+}
+
+.hud-icon {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 8px var(--cin-gold) !important;
+}
+
+.hud-number {
+  color: var(--cin-stone) !important;
+}
+
+.tech-divider-horizontal {
+  background: linear-gradient(90deg, transparent, rgba(139, 90, 43, 0.55), transparent) !important;
+}
+
+.tech-divider-horizontal::after {
+  background: linear-gradient(90deg, transparent, #ff8c00, transparent) !important;
+}
+
+.tech-divider-vertical {
+  background: linear-gradient(180deg, transparent, rgba(139, 90, 43, 0.55), transparent) !important;
+}
+
+.tech-divider-vertical::after {
+  background: linear-gradient(180deg, transparent, #ff8c00, transparent) !important;
+}
+
+/* ── 9. SOFT SKILLS ──────────────────────────────────────── */
+#soft-skills {
+  background:
+    linear-gradient(to bottom, rgba(10, 12, 10, 0.88), rgba(5, 8, 5, 0.94)),
+    url('https://images.unsplash.com/photo-1542300058-849d3b08aa0f?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.soft-card {
+  background: rgba(15, 20, 15, 0.78) !important;
+  border: 1px solid rgba(139, 90, 43, 0.38) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75), inset 0 0 16px rgba(139, 90, 43, 0.08) !important;
+  /* single transition declaration — no !important so the JS carousel can override */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.soft-card:hover {
+  transform: translateY(-4px) scale(1.015) !important;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.88), 0 0 20px rgba(232, 176, 89, 0.22) !important;
+  border-color: rgba(232, 176, 89, 0.55) !important;
+}
+
+.soft-card.active {
+  border-color: var(--cin-gold) !important;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.9),
+    0 0 24px rgba(232, 176, 89, 0.18),
+    inset 0 0 24px rgba(232, 176, 89, 0.12) !important;
+}
+
+.soft-icon {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 8px var(--cin-gold) !important;
+}
+
+/* ── 10. EDUCATION ───────────────────────────────────────── */
+#education {
+  background:
+    linear-gradient(to bottom, rgba(15, 10, 5, 0.88), rgba(5, 3, 0, 0.94)),
+    url('https://images.unsplash.com/photo-1555985202-12975b0235dc?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.edu-overview-card {
+  background: rgba(20, 15, 10, 0.82) !important;
+  border: 1px solid rgba(139, 90, 43, 0.45) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.edu-overview-card:hover {
+  transform: translateY(-4px) scale(1.015) !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.9), 0 0 20px rgba(232, 176, 89, 0.22) !important;
+  border-color: var(--cin-gold) !important;
+}
+
+.edu-arrow path {
+  stroke: var(--cin-gold) !important;
+  filter: drop-shadow(0 0 4px rgba(232, 176, 89, 0.5)) !important;
+}
+
+.results-panel,
+.glass-panel {
+  background: rgba(20, 15, 10, 0.9) !important;
+  border: 1px solid var(--cin-brown) !important;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.9), 0 0 16px rgba(232, 176, 89, 0.08) !important;
+}
+
+/* ── 11. PROJECTS ────────────────────────────────────────── */
+#projects {
+  background:
+    linear-gradient(to bottom, rgba(5, 3, 0, 0.94), rgba(10, 5, 0, 0.88)),
+    url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.project-portal {
+  background: rgba(15, 10, 5, 0.82) !important;
+  border: 2px solid #3a2a18 !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.project-portal:hover {
+  border-color: var(--cin-brown) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 32px rgba(232, 176, 89, 0.15) !important;
+}
+
+.project-world-bg {
+  filter: sepia(0.5) hue-rotate(-30deg) brightness(0.6) !important;
+}
+
+.projects-fog {
+  opacity: 0.08 !important;
+}
+
+.projects-aurora {
+  opacity: 0.08 !important;
+  background: radial-gradient(ellipse at top, rgba(232, 176, 89, 0.25), transparent 55%) !important;
+}
+
+.project-cta {
+  background: linear-gradient(90deg, var(--cin-brown), var(--cin-dark)) !important;
+  color: var(--cin-stone) !important;
+  border: 1px solid var(--cin-gold) !important;
+  transition: box-shadow 0.25s ease, transform 0.2s ease !important;
+}
+
+.project-cta:hover {
+  box-shadow: 0 0 18px rgba(232, 176, 89, 0.45) !important;
+  transform: scale(1.04) !important;
+}
+
+/* ── 12. ACHIEVEMENTS ────────────────────────────────────── */
+#achievements {
+  background:
+    radial-gradient(circle at center, rgba(139, 90, 43, 0.08), rgba(5, 3, 0, 0.95)),
+    url('https://images.unsplash.com/photo-1606011334315-025e4baab810?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.arc-card-inner {
+  background: rgba(25, 18, 10, 0.82) !important;
+  border: 1px solid rgba(232, 176, 89, 0.25) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.arc-card-inner:hover {
+  transform: translateY(-4px) scale(1.015) !important;
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.9), 0 0 20px rgba(232, 176, 89, 0.22) !important;
+}
+
+.arc-main-card .arc-card-inner {
+  border: 2px solid var(--cin-gold) !important;
+  box-shadow: 0 0 32px rgba(232, 176, 89, 0.15), inset 0 0 16px rgba(232, 176, 89, 0.08) !important;
+}
+
+.arc-speedometer-line {
+  border-top-color: rgba(232, 176, 89, 0.25) !important;
+}
+
+.arc-glow-core {
+  background: radial-gradient(circle, rgba(232, 176, 89, 0.15) 0%, transparent 55%) !important;
+}
+
+.arc-rank {
+  color: var(--cin-gold) !important;
+}
+
+.arc-card-xp {
+  color: var(--cin-gold) !important;
+}
+
+/* ── 13. CERTIFICATES ────────────────────────────────────── */
+#certifications {
+  background:
+    linear-gradient(to bottom, rgba(10, 8, 5, 0.94), rgba(20, 15, 10, 0.88)),
+    url('https://images.unsplash.com/photo-1533158307587-828f0a76ef46?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.certificate-card {
+  border: 4px solid var(--cin-brown) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85), 0 0 12px rgba(232, 176, 89, 0.15) !important;
+}
+
+.certificate-card::after {
+  background: rgba(232, 176, 89, 0.08) !important;
+}
+
+/* ── 14. CONTACT ─────────────────────────────────────────── */
+#contact {
+  background:
+    radial-gradient(circle at center, rgba(30, 20, 10, 0.75), rgba(5, 3, 0, 0.95)),
+    url('https://images.unsplash.com/photo-1505909182942-e2f09aee3e89?q=60&w=1600&auto=format&fit=crop') center/cover !important;
+}
+
+.contact-view {
+  background: rgba(15, 10, 5, 0.78) !important;
+  border: 1px solid rgba(139, 90, 43, 0.38) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.88), inset 0 0 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, var(--cin-brown), var(--cin-dark)) !important;
+  border: 1px solid var(--cin-gold) !important;
+  color: var(--cin-stone) !important;
+  transition: box-shadow 0.25s ease, transform 0.2s ease !important;
+}
+
+.contact-btn:hover {
+  box-shadow: 0 0 18px rgba(232, 176, 89, 0.4) !important;
+  transform: scale(1.04) !important;
+}
+
+.contact-info-card {
+  background: rgba(20, 15, 10, 0.55) !important;
+  border: 1px solid rgba(139, 90, 43, 0.28) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease !important;
+}
+
+.contact-info-card:hover {
+  background: rgba(30, 20, 10, 0.75) !important;
+  border-color: var(--cin-gold) !important;
+  transform: translateX(5px) !important;
+}
+
+/* ── 15. FOOTER ──────────────────────────────────────────── */
+.monolith-footer {
+  background: #050300 !important;
+  border-top: 1px solid #3a2a18 !important;
+}
+
+.footer-accent-line {
+  background: linear-gradient(90deg, transparent, var(--cin-gold), transparent) !important;
+}
+
+.footer-bg-text {
+  color: rgba(232, 176, 89, 0.04) !important;
+}
+
+.f-brand-name {
+  color: var(--cin-stone) !important;
+  text-shadow: 0 0 12px rgba(232, 176, 89, 0.3) !important;
+}
+
+.btn-view-dossier {
+  background: rgba(20, 15, 10, 0.78) !important;
+  border-color: var(--cin-brown) !important;
+  color: var(--cin-gold) !important;
+}
+
+.btn-view-dossier:hover {
+  background: rgba(30, 20, 10, 0.88) !important;
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 0 24px rgba(232, 176, 89, 0.25) !important;
+}
+
+.f-nav-links a {
+  color: rgba(232, 176, 89, 0.65) !important;
+  transition: color 0.2s ease !important;
+}
+
+.f-nav-links a:hover {
+  color: var(--cin-gold) !important;
+}
+
+.f-copyright {
+  color: rgba(232, 176, 89, 0.4) !important;
+}
+
+.f-system-status {
+  color: rgba(232, 176, 89, 0.5) !important;
+}
+
+.status-pulse {
+  background: var(--cin-gold) !important;
+  box-shadow: 0 0 6px var(--cin-gold) !important;
+}
+
+/* ── 16. AMBIENT TORCH (injected by JS) ──────────────────── */
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.88;
+  }
+
+  50% {
+    opacity: 0.78;
+  }
+
+  75% {
+    opacity: 0.84;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.ambient-torch {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.13) 0%, transparent 68%);
+  pointer-events: none;
+  will-change: opacity;
+  animation: flicker 4s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+  /* Raise on its own compositing layer */
+  transform: translateZ(0);
+}
+
+/* ── 17. SCROLLBAR ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cin-cave);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cin-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cin-brown);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   18. GLOBAL BLUE → GOLD DECONTAMINATION
+   Covers every hardcoded rgba(96,165,250), #00ffff, #38bdf8
+   that bypasses the --cyan variable.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── HERO SECTION ────────────────────────────────────────── */
+.nav-logo {
+  text-shadow: 0 0 15px rgba(232, 176, 89, 0.7) !important;
+}
+
+#text-hello,
+#text-welcome {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(232, 176, 89, 0.5) !important;
+}
+
+#text-name {
+  text-shadow:
+    0 0 15px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(232, 176, 89, 0.7),
+    0 5px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+#text-role {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 20px rgba(232, 176, 89, 0.55) !important;
+}
+
+/* ── SECTION SUBTITLE ────────────────────────────────────── */
+.section-subtitle {
+  color: rgba(232, 176, 89, 0.55) !important;
+}
+
+/* ── ABOUT SECTION ───────────────────────────────────────── */
+.about-tag {
+  color: var(--cin-gold) !important;
+}
+
+.about-tag::before,
+.about-tag::after {
+  color: var(--cin-gold) !important;
+}
+
+.divider-line {
+  background: linear-gradient(90deg, transparent, var(--cin-gold), transparent) !important;
+}
+
+.divider-icon {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 12px var(--cin-gold) !important;
+}
+
+/* ── TECH SKILLS ─────────────────────────────────────────── */
+.category-title {
+  color: var(--cin-gold) !important;
+  border: 1px solid rgba(139, 90, 43, 0.25) !important;
+  background: rgba(139, 90, 43, 0.06) !important;
+  text-shadow: 0 0 12px rgba(232, 176, 89, 0.35) !important;
+}
+
+/* ── SOFT SKILLS CAROUSEL ────────────────────────────────── */
+.soft-bg-glow {
+  background: radial-gradient(circle, rgba(232, 176, 89, 0.05) 0%, transparent 60%) !important;
+}
+
+@keyframes activeCardGlow {
+  0% {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(232, 176, 89, 0.4), inset 0 0 10px rgba(139, 90, 43, 0.3);
+    border-color: rgba(232, 176, 89, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(232, 176, 89, 0.75), inset 0 0 20px rgba(139, 90, 43, 0.5);
+    border-color: rgba(232, 176, 89, 0.9);
+  }
+}
+
+.soft-card.active .soft-icon {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 20px var(--cin-gold) !important;
+}
+
+.soft-carousel-btn {
+  background: rgba(20, 15, 10, 0.6) !important;
+  border: 1px solid rgba(139, 90, 43, 0.4) !important;
+  color: var(--cin-gold) !important;
+}
+
+.soft-carousel-btn:hover {
+  background: rgba(139, 90, 43, 0.2) !important;
+  box-shadow: 0 0 18px rgba(232, 176, 89, 0.4) !important;
+}
+
+/* ── EDUCATION (edu-styles.css overrides) ────────────────── */
+.edu-bg-glow {
+  background: radial-gradient(circle, rgba(232, 176, 89, 0.06) 0%, transparent 60%) !important;
+}
+
+.edu-overview-card.highlighted {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 0 30px rgba(232, 176, 89, 0.2), 0 8px 24px rgba(0, 0, 0, 0.85) !important;
+}
+
+.edu-card-badge {
+  background: rgba(139, 90, 43, 0.15) !important;
+  border: 1px solid rgba(232, 176, 89, 0.3) !important;
+  color: var(--cin-gold) !important;
+}
+
+#edu-select {
+  background: rgba(20, 15, 10, 0.85) !important;
+  border: 2px solid rgba(139, 90, 43, 0.5) !important;
+  color: var(--cin-stone) !important;
+}
+
+#edu-select:focus {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 0 20px rgba(232, 176, 89, 0.25) !important;
+}
+
+.results-stage {
+  border: 1px solid rgba(139, 90, 43, 0.2) !important;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(232, 176, 89, 0.05) !important;
+}
+
+.results-placeholder {
+  color: rgba(232, 176, 89, 0.4) !important;
+}
+
+@keyframes panelGlow {
+  0% {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(232, 176, 89, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(232, 176, 89, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(232, 176, 89, 0.12);
+  }
+}
+
+.ms-header {
+  border-bottom: 1px solid rgba(139, 90, 43, 0.2) !important;
+  background: rgba(139, 90, 43, 0.06) !important;
+}
+
+.ms-title {
+  text-shadow: 0 0 10px rgba(232, 176, 89, 0.4) !important;
+}
+
+.ms-badge {
+  background: var(--cin-gold) !important;
+  color: #1a0d00 !important;
+  box-shadow: 0 0 12px rgba(232, 176, 89, 0.4) !important;
+}
+
+.ms-table th {
+  color: var(--cin-gold) !important;
+  border-bottom: 1px solid rgba(139, 90, 43, 0.15) !important;
+}
+
+.ms-table .total-row td {
+  background: rgba(139, 90, 43, 0.12) !important;
+  color: var(--cin-gold) !important;
+}
+
+.ms-footer {
+  border-top: 1px solid rgba(139, 90, 43, 0.18) !important;
+}
+
+.ms-stat span {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 8px rgba(232, 176, 89, 0.4) !important;
+}
+
+.g-AA,
+.g-A1,
+.g-A2 {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 8px rgba(232, 176, 89, 0.35) !important;
+}
+
+/* ── CERTIFICATES ────────────────────────────────────────── */
+.certifications-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(232, 176, 89, 0.04) 0%, transparent 60%) !important;
+}
+
+.certifications-kicker {
+  color: var(--cin-gold) !important;
+}
+
+.certifications-title {
+  text-shadow: 0 0 20px rgba(232, 176, 89, 0.25) !important;
+}
+
+.certificate-card:hover {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 15px 40px rgba(232, 176, 89, 0.3), inset 0 0 15px rgba(139, 90, 43, 0.1) !important;
+}
+
+.certificate-modal-content img {
+  box-shadow: 0 0 40px rgba(232, 176, 89, 0.2) !important;
+  border: 1px solid rgba(139, 90, 43, 0.4) !important;
+}
+
+.certificate-modal-close:hover {
+  color: var(--cin-gold) !important;
+  text-shadow: 0 0 10px var(--cin-gold) !important;
+}
+
+/* ── CONTACT SECTION ─────────────────────────────────────── */
+#contact {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(232, 176, 89, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(139, 90, 43, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #0a0806 0%, #050300 100%) !important;
+}
+
+.contact-bg {
+  background-image:
+    radial-gradient(circle, rgba(139, 90, 43, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(232, 176, 89, 0.05) 1px, transparent 1px) !important;
+}
+
+#contact::before {
+  background: radial-gradient(circle, rgba(232, 176, 89, 0.1) 0%, transparent 70%) !important;
+}
+
+.contact-content-wrapper {
+  background: linear-gradient(180deg, rgba(10, 8, 5, 0.7) 0%, rgba(10, 8, 5, 0.3) 100%) !important;
+  border-top: 1px solid rgba(232, 176, 89, 0.2) !important;
+  border-bottom: 1px solid rgba(139, 90, 43, 0.2) !important;
+  box-shadow:
+    0 -20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 20px 40px rgba(232, 176, 89, 0.02),
+    inset 0 -20px 40px rgba(139, 90, 43, 0.02) !important;
+}
+
+.contact-content-wrapper::before {
+  background: linear-gradient(90deg, transparent, var(--cin-gold), var(--cin-brown), transparent) !important;
+}
+
+.contact-heading-wrap::before {
+  color: var(--cin-gold) !important;
+}
+
+.contact-heading {
+  background: linear-gradient(135deg, #eae0d5 0%, #e8b059 40%, #8b5a2b 70%, #eae0d5 100%) !important;
+  background-size: 300% 300% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 18px rgba(232, 176, 89, 0.35)) !important;
+}
+
+.contact-heading::before {
+  background: linear-gradient(135deg, var(--cin-gold), var(--cin-gold)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.contact-unlocked-badge {
+  color: var(--cin-gold) !important;
+  border: 1px solid rgba(232, 176, 89, 0.4) !important;
+  background: rgba(139, 90, 43, 0.1) !important;
+}
+
+.contact-info-icon {
+  background: rgba(139, 90, 43, 0.2) !important;
+  color: var(--cin-gold) !important;
+}
+
+.phone-icon,
+.email-icon,
+.whatsapp-icon,
+.linkedin-icon,
+.insta-icon,
+.location-icon {
+  background: rgba(139, 90, 43, 0.15) !important;
+  color: var(--cin-gold) !important;
+}
+
+/* ── FEEDBACK FORM ───────────────────────────────────────── */
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: var(--cin-gold) !important;
+  box-shadow: 0 0 15px rgba(232, 176, 89, 0.2) !important;
+}
+
+.input-group label {
+  color: rgba(232, 176, 89, 0.6) !important;
+}
+
+.input-group input:focus~label,
+.input-group textarea:focus~label,
+.input-group input:not(:placeholder-shown)~label,
+.input-group textarea:not(:placeholder-shown)~label {
+  color: var(--cin-gold) !important;
+}
+
+/* ── PROJECTS (remove neon aurora dots) ──────────────────── */
+.projects-shimmer-grid {
+  opacity: 0.04 !important;
+  background-image: radial-gradient(circle, rgba(232, 176, 89, 0.5) 1px, transparent 1px) !important;
+}
+
+.projects-kicker {
+  color: var(--cin-gold) !important;
+}
+
+.projects-micro-stats span {
+  color: rgba(232, 176, 89, 0.7) !important;
+}
+
+.indicator-dot.is-active {
+  background: var(--cin-gold) !important;
+  box-shadow: 0 0 8px var(--cin-gold) !important;
+}
+
+.indicator-line {
+  background: rgba(139, 90, 43, 0.3) !important;
+}
+
+.indicator-progress {
+  background: var(--cin-gold) !important;
+}
+
+.project-score strong {
+  color: var(--cin-gold) !important;
+}
+
+.projects-next-link {
+  color: var(--cin-gold) !important;
+  border-color: rgba(232, 176, 89, 0.4) !important;
+}
+
+/* ── ACHIEVEMENTS ────────────────────────────────────────── */
+.arc-kicker {
+  color: var(--cin-gold) !important;
+}
+
+.arc-featured-badge {
+  background: var(--cin-gold) !important;
+  color: #1a0d00 !important;
+}
+
+/* ── MODAL OVERLAYS ──────────────────────────────────────── */
+.arc-modal-close:hover,
+.video-modal-close:hover,
+#certificate-modal-close:hover {
+  color: var(--cin-gold) !important;
+}

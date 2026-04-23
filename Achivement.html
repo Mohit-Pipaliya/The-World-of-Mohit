@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievements - Mohit Pipaliya</title>
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <section id="achievements" class="reward-section">
+    <div class="reward-bg" aria-hidden="true">
+      <div class="reward-particles"></div>
+      <div class="reward-glow-pulse"></div>
+    </div>
+
+    <div class="reward-shell">
+      <header class="reward-header">
+        <h2 class="reward-title"><i class="fa-solid fa-trophy trophy-icon"></i> Achievements <i class="fa-solid fa-trophy trophy-icon"></i></h2>
+        <p class="reward-subtitle">Milestones Unlocked</p>
+      </header>
+
+      <div class="reward-cards-container">
+        <!-- Card 1 (Left) -->
+        <article class="reward-card side-card left-card" data-achievement-title="Carrom Winner Team Trophy" style="--delay: 0s;">
+          <div class="reward-card-glass">
+            <div class="reward-unlocked-badge"><i class="fa-solid fa-lock-open"></i> UNLOCKED</div>
+            <div class="reward-image-box">
+              <img src="Achivements/team carrom.jpeg" alt="Carrom Team Trophy">
+              <div class="reward-shine"></div>
+            </div>
+            <div class="reward-info">
+              <h3 class="reward-name">Carrom Team Trophy</h3>
+              <p class="reward-short-desc">Sports - Victory</p>
+            </div>
+            <div class="reward-hidden-data">
+              Won the doubles team event in College Sports Week 2026, demonstrating teamwork, coordination, and competitive performance.
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 (Center) -->
+        <article class="reward-card center-card" data-achievement-title="Runner-up Zimension Game Jam" style="--delay: 0.3s;">
+          <div class="reward-card-glass">
+            <div class="reward-unlocked-badge"><i class="fa-solid fa-lock-open"></i> UNLOCKED</div>
+            <div class="reward-image-box">
+              <img src="Achivements/zimension.png" alt="Zimension Game Jam">
+              <div class="reward-shine"></div>
+            </div>
+            <div class="reward-info">
+              <h3 class="reward-name">Runner-up Zimension</h3>
+              <p class="reward-short-desc">Game Jam - Rank 2</p>
+            </div>
+            <div class="reward-hidden-data">
+              Participated in a national 2-day game jam with 300+ teams. Secured AIR 2 with “The Secret Book”, a treasure hunt puzzle game featuring 4-level progression.
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 (Right) -->
+        <article class="reward-card side-card right-card" data-achievement-title="Solo Runner-up Carrom" style="--delay: 0.6s;">
+          <div class="reward-card-glass">
+            <div class="reward-unlocked-badge"><i class="fa-solid fa-lock-open"></i> UNLOCKED</div>
+            <div class="reward-image-box">
+              <img src="Achivements/runner up carrom.jpeg" alt="Solo Carrom">
+              <div class="reward-shine"></div>
+            </div>
+            <div class="reward-info">
+              <h3 class="reward-name">Solo Runner-up Carrom</h3>
+              <p class="reward-short-desc">Sports - Rank 2</p>
+            </div>
+            <div class="reward-hidden-data">
+              Achieved runner-up position in the single-player carrom tournament during College Sports Week 2026.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for full expansion -->
+  <div id="reward-modal" class="reward-modal-overlay" aria-hidden="true">
+    <div class="reward-modal-backdrop"></div>
+    <div class="reward-modal-content">
+      <button class="reward-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="reward-modal-badge"><i class="fa-solid fa-star"></i> ACHIEVEMENT UNLOCKED</div>
+      <h3 class="reward-modal-title"></h3>
+      <div class="reward-modal-image-wrap"></div>
+      <p class="reward-modal-desc"></p>
+    </div>
+  </div>
+
+  <script src="achivement-script.js"></script>
+</body>
+</html>

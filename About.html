@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me — Mohit Pipaliya</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <style>
+    /* Specific styles for About page */
+    body {
+      height: 200vh; /* Allow plenty of scrolling */
+      background: var(--dark);
+    }
+    
+    #top-nav {
+      position: fixed; /* Keep navbar on top while scrolling */
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    #about-trigger-area {
+      position: absolute;
+      top: 0; width: 100%; height: 120vh;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--cyan);
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 4px;
+      font-size: 14px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+      text-shadow: 0 0 10px rgba(96, 165, 250, 0.8);
+      z-index: 50;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-15px) translateX(-50%); }
+      60% { transform: translateY(-7px) translateX(-50%); }
+    }
+
+    #about-content {
+      position: fixed; /* Stick it to the viewport */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5rem;
+      padding: 0 40px;
+      z-index: 10;
+    }
+
+    .about-left {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      perspective: 1000px; /* For 3D rotation */
+    }
+
+    .about-img-container {
+      width: 380px;
+      height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid rgba(96, 165, 250, 0.5);
+      box-shadow: 0 0 40px rgba(96, 165, 250, 0.3), inset 0 0 30px rgba(96, 165, 250, 0.4);
+      transform-style: preserve-3d;
+      opacity: 0; /* GSAP will handle */
+    }
+
+    .about-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(10%) contrast(1.1);
+      transition: filter 0.5s;
+    }
+
+    .about-img-container:hover img {
+      filter: grayscale(0%) contrast(1.2);
+    }
+
+    .about-right {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .about-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 3.5rem;
+      color: var(--white);
+      text-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+      letter-spacing: 5px;
+      opacity: 0; /* GSAP */
+      margin-bottom: 10px;
+    }
+
+    .about-text {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.3rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    }
+    
+    .text-line {
+      display: block; /* Force new line for staggering effectively */
+      opacity: 0; /* GSAP */
+      margin-bottom: 8px;
+    }
+    
+    .highlight {
+      color: var(--cyan);
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div id="parallax-bg"></div>
+  <div id="vignette"></div>
+
+  <!-- Navbar -->
+  <nav id="top-nav">
+    <div class="nav-inner">
+      <span class="nav-logo">MOHIT PIPALIYA<span class="logo-dot">.</span></span>
+      <ul id="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="About.html" class="nav-link" style="color:var(--cyan); border-bottom: 2px solid var(--cyan); text-shadow: 0 0 15px rgba(96,165,250,0.8);">About Me</a></li>
+        <li><a href="index.html#tech-skills" class="nav-link">Technical Skills</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Scroll Trigger Area -->
+  <div id="about-trigger-area"></div>
+  <div class="scroll-indicator">Scroll Down 20vh</div>
+
+  <!-- Content (Fixed in center, animated in via ScrollTrigger) -->
+  <section id="about-content">
+    <div class="about-left">
+      <div class="about-img-container">
+        <img src="image/Profile.jpeg" alt="Mohit Pipaliya">
+      </div>
+    </div>
+    
+    <div class="about-right">
+      <h2 class="about-title">About Me</h2>
+      <div class="about-text">
+        <span class="text-line">Computer Engineering student with strong</span>
+        <span class="text-line">passion for <span class="highlight">game development</span>.</span>
+        <span class="text-line">Skilled in Unity 3D and 3D game mechanics.</span>
+        <span class="text-line">Experience in story-based and</span>
+        <span class="text-line">interactive game development.</span>
+        <span class="text-line">Strong in problem-solving, creativity,</span>
+        <span class="text-line">and learning new <span class="highlight">game design techniques</span>.</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Mouse & Scroll Parallax for Background (Maintains consistency with Home page)
+    let targetMouseX = 0, targetMouseY = 0, currentBgX = 0, currentBgY = 0;
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 50;
+      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 50;
+    });
+
+    const bgElem = document.getElementById('parallax-bg');
+    function animateBg() {
+      requestAnimationFrame(animateBg);
+      currentBgX += (targetMouseX - currentBgX) * 0.05;
+      currentBgY += (targetMouseY - currentBgY) * 0.05;
+      const scrollY = window.scrollY;
+      if (bgElem) {
+        bgElem.style.transform = `translate3d(${-currentBgX}px, calc(${-scrollY * 0.4}px + ${-currentBgY}px), 0) scale(1.05)`;
+      }
+    }
+    animateBg();
+
+    // Scroll Animations Triggered at exactly 20vh
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#about-trigger-area",
+        start: "top -20%", // Triggers exactly when scrolled 20vh down
+        toggleActions: "play none none reverse", // Reverses beautifully when scrolling back up
+      }
+    });
+
+    // LEFT: image slide from left, rotateY(720deg), scale(1.1)
+    tl.fromTo(".about-img-container", 
+      { x: -500, opacity: 0, rotationY: -720, scale: 0.5 },
+      { x: 0, opacity: 1, rotationY: 0, scale: 1.1, duration: 1.8, ease: "power4.out" },
+      0
+    );
+
+    // RIGHT: About text slide up from bottom stagger lines
+    tl.fromTo(".about-title", 
+      { y: 80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" },
+      0.4
+    );
+
+    tl.fromTo(".text-line",
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" },
+      0.6
+    );
+    
+    // Hide scroll indicator on scroll
+    gsap.to(".scroll-indicator", {
+      scrollTrigger: {
+        trigger: "#about-trigger-area",
+        start: "top -5%",
+        toggleActions: "play none none reverse",
+      },
+      opacity: 0,
+      duration: 0.5
+    });
+  </script>
+</body>
+</html>

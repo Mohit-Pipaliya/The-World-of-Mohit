@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The World of Mohit | Game Developer & Creator</title>
+  <meta name="description"
+    content="Explore 'The World of Mohit' — A premium Game Development portfolio by Mohit Pipaliya. Specializing in Unity, C#, and cinematic game environments." />
+  <meta name="keywords"
+    content="Mohit Pipaliya, Game Developer, Unity Developer, Portfolio, Game Design, C#, 3D Portfolio" />
+  <meta name="author" content="Mohit Pipaliya" />
+
+  <!-- Performance: Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
+
+  <!-- Performance: Preload Critical Hero Background -->
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=60&w=1600&auto=format&fit=crop">
+
+  <!-- SEO: Open Graph / Social Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The World of Mohit | Game Developer" />
+  <meta property="og:description" content="Experience a cinematic game developer portfolio journey." />
+  <meta property="og:image" content="image/Profile.jpeg" />
+
+  <meta name="theme-color" content="#e8b059">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="edu-styles.css" />
+  <link rel="stylesheet" href="cinematic.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three":         "https://unpkg.com/three@0.154.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+
+<body id="home">
+
+  <nav id="top-nav">
+    <div class="nav-inner">
+      <span class="nav-logo">MOHIT PIPALIYA<span class="logo-dot">.</span></span>
+      <button id="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About Me</a></li>
+        <li><a href="#tech-skills" class="nav-link">Technical Skills</a></li>
+        <li><a href="#soft-skills" class="nav-link">Soft Skills</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#achievements" class="nav-link">Achievements</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION WITH FIXED 3D BACKGROUND -->
+  <section id="hero-section">
+    <div id="parallax-bg"></div>
+    <div id="canvas-container"></div>
+    <div id="vignette"></div>
+
+    <div id="ui-root">
+
+      <!-- HERO MAIN (PURE FLOATING TEXT - NO BOXES) -->
+      <main id="hero-main">
+        <h1 id="text-hello" class="hero-text-item">Hello</h1>
+        <h1 id="text-welcome" class="hero-text-item">Welcome</h1>
+        <h2 id="text-name" class="hero-text-item">I am Mohit Pipaliya</h2>
+        <h3 id="text-role">Game Developer & Creator</h3>
+      </main>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <!-- Ambient particle canvas for About -->
+    <canvas id="about-particles"></canvas>
+
+    <div class="about-left">
+
+
+      <div class="about-img-wrapper">
+        <div class="img-glow-ring"></div>
+        <div class="about-img-container">
+          <img loading="lazy" src="image/Profile.jpeg" alt="Mohit Pipaliya">
+        </div>
+
+      </div>
+
+      <!-- STAT ORBS -->
+      <div class="about-stats-container">
+        <div class="stat-orb text-line stat-cyan">
+          <div class="orb-glow"></div>
+          <i class="fa-brands fa-unity stat-icon"></i>
+          <h3 class="stat-number">2+</h3>
+          <p class="stat-label">Years Unity</p>
+        </div>
+        <div class="stat-orb text-line stat-purple">
+          <div class="orb-glow"></div>
+          <i class="fa-solid fa-gamepad stat-icon"></i>
+          <h3 class="stat-number">1</h3>
+          <p class="stat-label">Published</p>
+        </div>
+        <div class="stat-orb text-line stat-gold">
+          <div class="orb-glow"></div>
+          <i class="fa-solid fa-trophy stat-icon"></i>
+          <h3 class="stat-number">1</h3>
+          <p class="stat-label">Game Jam</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="about-tag">[ PROFILE_LOADED ]</div>
+      <h2 class="about-title">About <span class="title-accent">Me</span></h2>
+      <div class="about-divider">
+        <span class="divider-line"></span>
+        <i class="fa-solid fa-gamepad divider-icon"></i>
+        <span class="divider-line"></span>
+      </div>
+      <div class="about-text">
+        <p class="text-line">I'm a Computer Engineering student and passionate Game Developer skilled in <span
+            class="highlight">Unity 3D</span>.</p>
+        <p class="text-line">I focus on designing <span class="highlight">puzzle-based gameplay</span> and level-driven
+          experiences that engage players through logic and interaction.</p>
+        <p class="text-line">I specialize in building game systems using Unity's visual tools like <span
+            class="highlight">Timeline and Signals</span>, enabling efficient and creative development without heavy
+          coding.</p>
+        <p class="text-line">I enjoy creating immersive gameplay and aim to build impactful and engaging <span
+            class="highlight">gaming experiences</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL SKILLS SECTION -->
+  <section id="tech-skills">
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-subtitle">[ Proficiency Matrix Loaded ]</p>
+    <div class="skills-container two-col-layout">
+
+      <!-- LEFT COLUMN -->
+      <div class="skills-left-col">
+        <!-- LANGUAGES -->
+        <div class="skill-category">
+          <h3 class="category-title text-line">System.Languages</h3>
+          <div class="skill-grid">
+
+            <div class="hud-node node-sm text-line" style="--theme-color: #d946ef;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="49"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-hashtag hud-icon floating"></i>
+                <span class="hud-number" data-percent="49">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">C#</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-sm text-line" style="--theme-color: #3b82f6;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="68"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-c hud-icon floating"></i>
+                <span class="hud-number" data-percent="68">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">C</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-sm text-line" style="--theme-color: #10b981;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="72"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-brands fa-python hud-icon floating"></i>
+                <span class="hud-number" data-percent="72">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Python</h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ANIMATED HORIZONTAL DIVIDER -->
+        <div class="tech-divider-horizontal"></div>
+
+        <!-- TOOLS -->
+        <div class="skill-category">
+          <h3 class="category-title text-line">Utility.Tools</h3>
+          <div class="skill-grid">
+
+            <div class="hud-node node-sm text-line" style="--theme-color: #0284c7;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="68"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-code hud-icon floating"></i>
+                <span class="hud-number" data-percent="68">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">VS Code</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-sm text-line" style="--theme-color: #ea580c;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="5"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-cube hud-icon floating"></i>
+                <span class="hud-number" data-percent="5">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Blender</h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div> <!-- END LEFT COLUMN -->
+
+      <!-- ANIMATED VERTICAL DIVIDER -->
+      <div class="tech-divider-vertical"></div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="skills-right-col">
+        <!-- GAME DEVELOPMENT -->
+        <div class="skill-category">
+          <h3 class="category-title text-line">Core.Engine</h3>
+          <div class="skill-grid grid-2x2">
+
+            <div class="hud-node node-lg text-line" style="--theme-color: #00ffff;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="90"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-brands fa-unity hud-icon floating"></i>
+                <span class="hud-number" data-percent="90">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Unity Engine</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-lg text-line" style="--theme-color: #ec4899;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="85"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-bezier-curve hud-icon floating"></i>
+                <span class="hud-number" data-percent="85">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Game Design</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-lg text-line" style="--theme-color: #f97316;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="55"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-mobile-screen-button hud-icon floating"></i>
+                <span class="hud-number" data-percent="55">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Game UI/UX</h4>
+              </div>
+            </div>
+
+            <div class="hud-node node-lg text-line" style="--theme-color: #fbbf24;">
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-dashed"></div>
+              <svg class="hud-progress-svg" viewBox="0 0 200 200">
+                <circle class="hud-progress-bg" cx="100" cy="100" r="90"></circle>
+                <circle class="hud-progress-fill" cx="100" cy="100" r="90" data-percent="95"></circle>
+              </svg>
+              <div class="hud-center">
+                <i class="fa-solid fa-book-journal-whills hud-icon floating"></i>
+                <span class="hud-number" data-percent="95">0%</span>
+              </div>
+              <div class="hud-label-container">
+                <h4 class="hud-label-text">Story Writing</h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div> <!-- END RIGHT COLUMN -->
+
+    </div>
+  </section>
+
+  <!-- SOFT SKILLS SECTION -->
+  <section id="soft-skills">
+    <div class="soft-bg-glow"></div>
+    <h2 class="section-title">Soft Skills</h2>
+    <p class="section-subtitle">[ Behavioral Competencies ]</p>
+
+    <div class="soft-carousel-wrapper">
+      <button class="soft-carousel-btn prev-btn" aria-label="Previous Skill"><i
+          class="fa-solid fa-chevron-left"></i></button>
+
+      <div class="soft-carousel-track-container">
+        <div class="soft-carousel-track" id="soft-carousel-track">
+          <!-- Creativity -->
+          <div class="soft-card active">
+            <i class="fa-solid fa-lightbulb soft-icon"></i>
+            <h3 class="soft-title">Creativity</h3>
+            <p class="soft-desc">Designing unique gameplay ideas and engaging puzzle mechanics</p>
+          </div>
+
+          <!-- Problem Solving -->
+          <div class="soft-card">
+            <i class="fa-solid fa-puzzle-piece soft-icon"></i>
+            <h3 class="soft-title">Problem Solving</h3>
+            <p class="soft-desc">Building logical systems and solving gameplay challenges</p>
+          </div>
+
+          <!-- Teamwork -->
+          <div class="soft-card">
+            <i class="fa-solid fa-users soft-icon"></i>
+            <h3 class="soft-title">Teamwork</h3>
+            <p class="soft-desc">Collaborating effectively in team-based projects and game jams</p>
+          </div>
+
+          <!-- Leadership -->
+          <div class="soft-card">
+            <i class="fa-solid fa-chess-king soft-icon"></i>
+            <h3 class="soft-title">Leadership</h3>
+            <p class="soft-desc">Taking initiative and guiding development decisions</p>
+          </div>
+
+          <!-- Communication -->
+          <div class="soft-card">
+            <i class="fa-solid fa-comments soft-icon"></i>
+            <h3 class="soft-title">Communication</h3>
+            <p class="soft-desc">Clearly expressing ideas and working efficiently with others</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="soft-carousel-btn next-btn" aria-label="Next Skill"><i
+          class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- EDUCATION SECTION -->
+  <section id="education">
+    <div class="edu-bg-glow"></div>
+    <h2 class="section-title reveal-elem">Education</h2>
+
+    <div class="edu-container snake-layout">
+      <!-- College (Top Left) -->
+      <div class="edu-overview-card college-card highlighted reveal-elem" data-side="left">
+        <div class="edu-card-icon">🎓</div>
+        <span class="edu-card-badge">B.E. Computer Engineering</span>
+        <div class="edu-card-school">Pacific School of Engineering</div>
+        <div class="edu-card-degree">Affiliated with Gujarat Technological University (GTU)</div>
+        <div class="edu-card-year">▸ Duration: 2023 – 2027</div>
+      </div>
+
+      <!-- Arrow 1 (Down Right) -->
+      <div class="edu-arrow arrow-down-right">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M 20 0 Q 20 50 50 50 L 80 50 Q 100 50 100 100" fill="none" stroke="url(#arrow-grad)"
+            stroke-width="2" />
+          <defs>
+            <linearGradient id="arrow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00ffff" />
+              <stop offset="100%" stop-color="#d946ef" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- 12th School (Middle Right) -->
+      <div class="edu-overview-card school-card reveal-elem" data-side="right">
+        <div class="edu-card-icon">📘</div>
+        <span class="edu-card-badge">Higher Secondary (12th – Science)</span>
+        <div class="edu-card-school">DCO Sarvajanik High School</div>
+        <div class="edu-card-degree">Pardi, Gujarat</div>
+        <div class="edu-card-year">▸ Completed in 2023</div>
+      </div>
+
+      <!-- Arrow 2 (Down Left) -->
+      <div class="edu-arrow arrow-down-left">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M 80 0 Q 80 50 50 50 L 20 50 Q 0 50 0 100" fill="none" stroke="url(#arrow-grad-rev)"
+            stroke-width="2" />
+          <defs>
+            <linearGradient id="arrow-grad-rev" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#d946ef" />
+              <stop offset="100%" stop-color="#00ffff" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- 10th School (Bottom Left) -->
+      <div class="edu-overview-card school-card reveal-elem" data-side="left">
+        <div class="edu-card-icon">📘</div>
+        <span class="edu-card-badge">Secondary School (10th)</span>
+        <div class="edu-card-school">N. R. Raut Sarvajanik Madhyamik Shala</div>
+        <div class="edu-card-degree">Nanapondha</div>
+        <div class="edu-card-year">▸ Completed in 2021</div>
+      </div>
+    </div>
+
+    <!-- Academic Results -->
+    <div class="edu-results-section reveal-elem">
+      <h2 class="section-title" style="font-size:2.2rem; margin-bottom:.5rem;">Select to View Result</h2>
+
+      <div class="edu-dropdown-wrapper">
+        <select id="edu-select">
+          <option value="" disabled selected>— Select Result —</option>
+          <option value="0">10th Standard</option>
+          <option value="1">12th Standard</option>
+          <option value="2">Semester 1</option>
+          <option value="3">Semester 2</option>
+          <option value="4">Semester 3</option>
+          <option value="5">Semester 4</option>
+          <option value="6">Semester 5</option>
+        </select>
+      </div>
+
+      <div class="results-stage" id="results-stage">
+        <canvas id="results-canvas"></canvas>
+        <div class="results-placeholder" id="results-placeholder">
+          <i class="fa-solid fa-table-list"
+            style="font-size:3rem; color:rgba(0,255,255,0.3); display:block; margin-bottom:1rem;"></i>
+          <span>Awaiting Selection</span>
+        </div>
+        <!-- Panel container holds the exact center coordinates for the panel -->
+        <div id="panel-container">
+          <div class="results-panel glass-panel" id="results-panel" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects-section">
+    <div class="projects-bg">
+      <div class="projects-fog"></div>
+      <div class="projects-aurora aurora-a"></div>
+      <div class="projects-aurora aurora-b"></div>
+      <div class="projects-depth-layer layer-a"></div>
+      <div class="projects-depth-layer layer-b"></div>
+      <div class="projects-depth-layer layer-c"></div>
+      <div class="projects-shimmer-grid"></div>
+      <div id="projects-particles" aria-hidden="true"></div>
+    </div>
+
+    <div class="projects-scroll-indicator" aria-hidden="true">
+      <span class="indicator-label">WORLD PATH</span>
+      <div class="indicator-line">
+        <span class="indicator-progress"></span>
+      </div>
+      <div class="indicator-dots">
+        <button class="indicator-dot is-active" data-world-dot="0" aria-label="Legacy of Dharma"></button>
+        <button class="indicator-dot" data-world-dot="1" aria-label="The Secret Book"></button>
+        <button class="indicator-dot" data-world-dot="2" aria-label="Swadeshi UnderDogs"></button>
+      </div>
+    </div>
+
+    <div class="projects-camera-stage">
+      <header class="projects-header" data-reveal>
+        <span class="projects-kicker">Signature Work Showcase</span>
+        <h2 class="projects-title glitch-text" data-text="PROJECTS">PROJECTS</h2>
+        <p class="projects-subtitle">A Journey Through My Game Worlds</p>
+        <div class="projects-micro-stats">
+          <span><i class="fa-solid fa-gamepad"></i> Interactive Worlds</span>
+          <span><i class="fa-solid fa-cube"></i> 3D + Puzzle Flow</span>
+          <span><i class="fa-solid fa-bolt"></i> Cinematic Transitions</span>
+        </div>
+        <span class="projects-light-sweep" aria-hidden="true"></span>
+      </header>
+
+      <div class="projects-worlds">
+        <article class="project-portal" data-world-index="0" data-enter-direction="right">
+          <div class="project-world-bg mythology-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-media" data-video-title="Legacy of Dharma">
+              <video src="video/Legacy_Of_Dharma_Prototype_Explanation.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="project-copy">
+              <h3 class="project-name">Legacy of Dharma</h3>
+              <div class="project-tags">
+                <span>3D RPG</span>
+                <span>Story Driven</span>
+                <span>Boss Battle</span>
+              </div>
+              <p class="project-description reveal-lines">Legacy of Dharma is a story-driven mythology adventure where
+                players guide Deva through sacred lands, solve divine puzzles, and battle an Asura in a cinematic final
+                showdown.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>97</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-portal" data-world-index="1" data-enter-direction="left">
+          <div class="project-world-bg puzzle-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content reverse">
+            <div class="project-copy">
+              <h3 class="project-name">The Secret Book</h3>
+              <div class="project-tags">
+                <span>Puzzle</span>
+                <span>Logic Based</span>
+                <span>Progression System</span>
+              </div>
+              <p class="project-description reveal-lines">The Secret Book is a mystery adventure puzzle game where each
+                chapter unlocks new clues, hidden symbols, and logic-driven challenges in an atmospheric treasure-hunt
+                journey.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>95</strong></span>
+              </div>
+            </div>
+            <div class="project-media" data-video-title="The Secret Book">
+              <video src="video/The Secret Book Trailer.mp4" autoplay muted loop playsinline></video>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-portal" data-world-index="2" data-enter-direction="right">
+          <div class="project-world-bg village-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-media" data-video-title="Swadeshi UnderDogs">
+              <video src="video/Swadeshi underdogs.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="project-copy">
+              <h3 class="project-name">Swadeshi UnderDogs - AntimBharat Bazaar Simulator</h3>
+              <div class="project-tags">
+                <span>Exploration</span>
+                <span>Educational</span>
+                <span>Festival Theme</span>
+              </div>
+              <p class="project-description reveal-lines">Swadeshi UnderDogs - AntimBharat Bazaar Simulator is a
+                market-themed exploration experience where players manage local trade choices, solve progression tasks,
+                and build a lively Swadeshi marketplace world.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>94</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="projects-next-wrap">
+        <a href="#achievements" class="projects-next-link nav-link">
+          Continue To Achievements <i class="fa-solid fa-arrow-down"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Video Fullscreen Modal -->
+  <div id="project-video-modal" class="video-modal-root" aria-hidden="true">
+    <div class="video-modal-backdrop"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" aria-label="Close Video"><i class="fa-solid fa-xmark"></i></button>
+      <div class="video-container">
+        <video id="modal-main-video" controls playsinline></video>
+      </div>
+      <div class="video-modal-footer">
+        <h3 id="modal-video-title">Project Gameplay</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPEEDOMETER ARC ACHIEVEMENTS SECTION -->
+  <section id="achievements" class="arc-achievements-section">
+    <div class="arc-background">
+      <div class="arc-speedometer-line"></div>
+      <div class="arc-glow-core"></div>
+    </div>
+
+    <div class="arc-shell">
+      <header class="arc-header" data-reveal>
+        <span class="arc-kicker">Performance Metrics</span>
+        <h2 class="arc-title">Unlocked Feats</h2>
+      </header>
+
+      <div class="arc-grid">
+        <!-- Card 1 (Left - Carrom Team) -->
+        <article class="arc-card arc-side-card arc-left" data-achievement-id="0">
+          <div class="arc-card-inner">
+            <div class="arc-card-media">
+              <img loading="lazy" src="Achivements/team carrom.jpeg" alt="Carrom Team Winner">
+              <div class="arc-card-overlay"></div>
+            </div>
+            <div class="arc-card-body">
+              <span class="arc-rank">RANK 01</span>
+              <h3 class="arc-card-title">Carrom Team Trophy</h3>
+              <p class="arc-card-desc">Won the doubles team event in College Sports Week 2026.</p>
+              <div class="arc-card-xp">+500 XP</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 (Center - Zimension, HIGHLIGHTED) -->
+        <article class="arc-card arc-main-card arc-center" data-achievement-id="1">
+          <div class="arc-card-inner">
+            <div class="arc-card-media">
+              <img loading="lazy" src="Achivements/zimension.png" alt="Zimension Runner-up">
+              <div class="arc-card-overlay"></div>
+              <div class="arc-featured-badge">FEATURED</div>
+            </div>
+            <div class="arc-card-body">
+              <span class="arc-rank">MYTHIC RANK</span>
+              <h3 class="arc-card-title">Runner-up Zimension</h3>
+              <p class="arc-card-desc">Secured AIR 2 in National Game Jam 2026. Designed "The Secret Book".</p>
+              <div class="arc-card-xp">+2500 XP</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 (Right - Solo Carrom) -->
+        <article class="arc-card arc-side-card arc-right" data-achievement-id="2">
+          <div class="arc-card-inner">
+            <div class="arc-card-media">
+              <img loading="lazy" src="Achivements/runner up carrom.jpeg" alt="Solo Carrom Runner-up">
+              <div class="arc-card-overlay"></div>
+            </div>
+            <div class="arc-card-body">
+              <span class="arc-rank">RANK 02</span>
+              <h3 class="arc-card-title">Solo Runner-up</h3>
+              <p class="arc-card-desc">Achieved 2nd place in Solo Carrom Championship 2026.</p>
+              <div class="arc-card-xp">+450 XP</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievement Modal -->
+  <div id="reward-modal" class="arc-modal" aria-hidden="true">
+    <div class="arc-modal-backdrop"></div>
+    <div class="arc-modal-content">
+      <button class="arc-modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="arc-modal-main">
+        <div class="arc-modal-media">
+          <div class="arc-modal-img-wrap"></div>
+        </div>
+        <div class="arc-modal-info">
+          <h2 class="arc-modal-title"></h2>
+          <p class="arc-modal-desc"></p>
+          <div class="arc-modal-stats">
+            <div class="arc-m-stat"><span>XP GAIN</span><strong id="m-xp-val"></strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CERTIFICATIONS SECTION -->
+  <section id="certifications" class="certifications-section">
+    <div class="certifications-bg"></div>
+    <header class="certifications-header reveal-elem">
+      <span class="certifications-kicker">Verified Skills</span>
+      <h2 class="certifications-title">Certificates</h2>
+      <p class="certifications-subtitle">Proof of knowledge, participation, and continuous learning.</p>
+    </header>
+
+    <div class="certifications-table-layout">
+      <!-- 8 Certificates -->
+      <div class="certificate-card" style="--rotation: -12deg; --x: -350px; --y: -100px;">
+        <img loading="lazy" src="Certificates/Carrom Team Winner .jpeg" alt="Carrom Team Winner">
+      </div>
+      <div class="certificate-card" style="--rotation: 5deg; --x: -150px; --y: -150px;">
+        <img loading="lazy" src="Certificates/National Unity Quiz Certificate.jpeg" alt="National Unity Quiz">
+      </div>
+      <div class="certificate-card" style="--rotation: -8deg; --x: 100px; --y: -180px;">
+        <img loading="lazy" src="Certificates/NXTWAVE.png" alt="NXTWAVE">
+      </div>
+      <div class="certificate-card" style="--rotation: 15deg; --x: 320px; --y: -120px;">
+        <img loading="lazy" src="Certificates/zimension.png" alt="Zimension">
+      </div>
+      <div class="certificate-card" style="--rotation: 8deg; --x: -300px; --y: 100px;">
+        <img loading="lazy" src="Certificates/Solar Ambassador Workshop Certificate.jpeg"
+          alt="Solar Ambassador Workshop">
+      </div>
+      <div class="certificate-card" style="--rotation: -5deg; --x: -80px; --y: 120px;">
+        <img loading="lazy" src="Certificates/Solo Carrom Runner up.jpeg" alt="Solo Carrom Runner up">
+      </div>
+      <div class="certificate-card" style="--rotation: 10deg; --x: 150px; --y: 100px;">
+        <img loading="lazy" src="Certificates/unstop.jpeg" alt="Unstop">
+      </div>
+      <div class="certificate-card" style="--rotation: -10deg; --x: 350px; --y: 80px;">
+        <img loading="lazy" src="Certificates/SAP innovation marathone.png" alt="SAP Innovation Marathon">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="contact-bg"></div>
+    <canvas id="contact-stars-canvas"></canvas>
+
+    <div class="contact-content-wrapper">
+
+      <!-- ── STEP 1: INITIAL PROMPT ── -->
+      <div id="contact-initial-view" class="contact-view">
+        <div class="contact-heading-wrap">
+          <h1 class="contact-heading" data-text="Contact Me">Contact Me</h1>
+        </div>
+        <p class="contact-subtitle">Play a quick game to unlock my contact 😄</p>
+
+        <div class="contact-btn-group">
+          <button id="btn-play-game" class="contact-btn cta-primary">
+            <i class="fa-solid fa-gamepad"></i>
+            <span class="btn-text">Play Game 🎮</span>
+            <div class="btn-glow"></div>
+          </button>
+          <button id="btn-skip-game" class="contact-btn cta-secondary">
+            <span class="btn-text">Skip ⏭</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: GAME VIEW ── -->
+      <div id="contact-game-view" class="contact-view" style="display:none; opacity:0;">
+
+        <!-- ── GAME CONTROLS BAR ── -->
+        <div class="game-controls-bar">
+          <div class="game-controls-left">
+            <span class="game-controls-title"><i class="fa-solid fa-gamepad"></i> Catch Me!</span>
+          </div>
+          <div class="game-controls-right">
+            <!-- Skip: jump straight to contact info -->
+            <button id="btn-game-skip" class="game-ctrl-btn game-ctrl-skip" title="Skip game — show contact directly">
+              <i class="fa-solid fa-forward-fast"></i>
+              <span>Skip</span>
+            </button>
+            <!-- Close: stop game, show contact info -->
+            <button id="btn-game-close" class="game-ctrl-btn game-ctrl-close" title="Close game — show contact info">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Score HUD -->
+        <div class="game-hud">
+          <span class="game-hud-label">SCORE</span>
+          <div class="game-score-wrap">
+            <span id="game-score-current">0</span>
+            <span class="game-score-divider">/</span>
+            <span class="game-score-total">5</span>
+          </div>
+          <div class="game-score-bar">
+            <div id="game-score-bar-fill" class="game-score-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Game Arena -->
+        <div id="game-arena">
+          <!-- Avatar - the clickable target -->
+          <div id="game-avatar">
+            <img loading="lazy" src="Game%20/Game%20image.jpeg" alt="Catch me!" draggable="false" />
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring2"></div>
+          </div>
+
+          <!-- Win message (hidden initially) -->
+          <div id="game-win-msg">
+            <div class="win-emoji">🎉</div>
+            <p class="win-text">You caught me!</p>
+          </div>
+        </div>
+
+        <!-- Instruction -->
+        <p class="game-instruction">Click the avatar <strong>5 times</strong> to unlock my contact info!</p>
+      </div>
+
+      <!-- ── STEP 3: CONTACT DETAILS ── -->
+      <div id="contact-details-view" class="contact-view" style="display:none; opacity:0;">
+        <div class="contact-unlocked-badge">🔓 Contact Unlocked</div>
+        <h2 class="contact-details-heading">Let's Connect!</h2>
+        <p class="contact-details-sub">I'm always open to new opportunities, collaborations, or just a good game jam
+          chat.</p>
+
+        <div class="contact-info-grid">
+          <!-- 1. Phone -->
+          <a href="tel:7990197880" class="contact-info-card" id="card-phone">
+            <div class="contact-info-icon phone-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Phone</span>
+              <span class="info-value">+91 79901 97880</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 2. Email -->
+          <a href="mailto:mohitpipaliya248@gmail.com" class="contact-info-card" id="card-email">
+            <div class="contact-info-icon email-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Email</span>
+              <span class="info-value">mohitpipaliya248@gmail.com</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 3. WhatsApp -->
+          <a href="https://wa.me/7990197880" target="_blank" rel="noopener noreferrer" class="contact-info-card"
+            id="card-whatsapp">
+            <div class="contact-info-icon whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">WhatsApp</span>
+              <span class="info-value">Message Me</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 4. LinkedIn -->
+          <a href="https://www.linkedin.com/in/mohitpipalya248" target="_blank" rel="noopener noreferrer"
+            class="contact-info-card" id="card-linkedin">
+            <div class="contact-info-icon linkedin-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">LinkedIn</span>
+              <span class="info-value">mohitpipalya248</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 5. Instagram -->
+          <a href="https://www.instagram.com/mohit_pipaliya_248/" target="_blank" rel="noopener noreferrer"
+            class="contact-info-card" id="card-instagram">
+            <div class="contact-info-icon insta-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Instagram</span>
+              <span class="info-value">@mohit_pipaliya_248</span>
+            </div>
+            <i class="fa-solid fa-arrow-right contact-card-arrow"></i>
+          </a>
+
+          <!-- 6. Location -->
+          <div class="contact-info-card" id="card-location" style="cursor: default;">
+            <div class="contact-info-icon location-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-info-content">
+              <span class="info-label">Location</span>
+              <span class="info-value">Pardi, Valaad</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toggle Button for Feedback Form -->
+        <button id="btn-toggle-feedback" class="contact-btn cta-primary"
+          style="margin-top: 2.5rem; margin-bottom: 1rem; display: none;">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span class="btn-text">Open Feedback Form</span>
+          <div class="btn-glow"></div>
+        </button>
+
+        <!-- Feedback Form -->
+        <div id="feedback-form-wrap" class="feedback-form-container" style="display: none;">
+          <h3 class="feedback-heading">Send a Message</h3>
+          <form id="contact-feedback-form" class="feedback-form">
+
+            <div class="feedback-form-row">
+              <div class="input-group">
+                <input type="text" id="fb-name" required placeholder=" " />
+                <label for="fb-name">Full Name</label>
+              </div>
+
+              <div class="input-group">
+                <input type="email" id="fb-email" required placeholder=" " />
+                <label for="fb-email">Email</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <select id="fb-reason" required>
+                <option value="" disabled selected hidden></option>
+                <option value="general">General Feedback</option>
+                <option value="job">Job Opportunity</option>
+                <option value="academic">Academic Question</option>
+                <option value="other">Other</option>
+              </select>
+              <label for="fb-reason">Reason</label>
+            </div>
+
+            <div class="input-group">
+              <textarea id="fb-message" rows="4" required placeholder=" "></textarea>
+              <label for="fb-message">Message</label>
+            </div>
+
+            <button type="submit" id="btn-submit-feedback" class="contact-btn cta-primary submit-btn">
+              <span class="btn-text">Send Message <i class="fa-regular fa-paper-plane"></i></span>
+              <div class="btn-glow"></div>
+            </button>
+          </form>
+        </div>
+
+        <button id="btn-play-again" class="contact-btn cta-secondary" style="margin-top: 2rem;">
+          <span class="btn-text">Play Again 🔁</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div><!-- /.contact-details-view -->
+
+    </div><!-- /.contact-content-wrapper -->
+  </section>
+
+  <!-- MONOLITHIC PREMIUM FOOTER -->
+  <footer class="monolith-footer">
+    <div class="footer-bg-text">MOHIT</div>
+    <div class="footer-accent-line"></div>
+
+    <div class="footer-container">
+      <div class="footer-main-row">
+        <!-- BRAND & TAGLINE -->
+        <div class="f-brand-block">
+          <h2 class="f-brand-name">THE WORLD OF MOHIT</h2>
+          <p class="f-brand-tagline">Architecting immersive digital experiences & advanced game systems. Pushing the
+            boundaries of what's possible.</p>
+        </div>
+
+        <!-- BIG ACTION BUTTON -->
+        <div class="f-resume-block">
+          <a href="Resume /Mohit_Pipaliya_Resume.pdf" target="_blank" rel="noopener noreferrer"
+            class="btn-view-dossier">
+            <span class="btn-glint"></span>
+            <span class="btn-content">
+              <i class="fa-solid fa-eye"></i>
+              VIEW PROFESSIONAL DOSSIER
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-secondary-row">
+        <!-- QUICK LINKS -->
+        <nav class="f-nav-links">
+          <a href="#hero-section">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Work</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- SOCIALS -->
+        <div class="f-social-icons">
+          <a href="https://github.com/MohitPipaliya1" target="_blank" rel="noopener noreferrer" title="GitHub"><i
+              class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mohit-pipaliya-a178932b1/" target="_blank" rel="noopener noreferrer"
+            title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/mohit_pipaliya_?igsh=MWt5dmVqcDhla3R0aA==" target="_blank"
+            rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-tertiary-row">
+        <div class="f-copyright">&copy; 2026 Mohit Pipaliya. ALL RIGHTS RESERVED.</div>
+        <div class="f-system-status">
+          <span class="status-pulse"></span>
+          CORE_SYSTEMS_ACTIVE
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CERTIFICATE MODAL -->
+  <div id="certificate-modal" class="certificate-modal" aria-hidden="true">
+    <div class="certificate-modal-backdrop"></div>
+    <div class="certificate-modal-content" role="dialog" aria-modal="true">
+      <button id="certificate-modal-close" class="certificate-modal-close" aria-label="Close certificate">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img loading="lazy" id="certificate-modal-image" src="" alt="Certificate Large View">
+    </div>
+  </div>
+
+  <div id="achievement-overlay" class="achievement-overlay" aria-hidden="true">
+    <div class="achievement-overlay-backdrop"></div>
+    <div class="achievement-overlay-card" role="dialog" aria-modal="true">
+      <button type="button" class="achievement-overlay-close" aria-label="Close achievement preview">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="achievement-overlay-unlock">Achievement Unlocked</div>
+      <h3 class="achievement-overlay-title"></h3>
+      <div class="achievement-overlay-media"></div>
+      <p class="achievement-overlay-description"></p>
+    </div>
+  </div>
+
+  <div id="video-modal" class="video-modal" aria-hidden="true">
+    <div class="video-modal-backdrop"></div>
+    <div class="video-modal-panel" role="dialog" aria-modal="true">
+      <button id="video-modal-close" class="video-modal-close" aria-label="Close video">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="video-modal-title"></div>
+      <div class="video-modal-visualizer" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <video id="video-modal-player" controls playsinline></video>
+      <div class="video-modal-progress-glow"></div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+  <script type="module" src="edu-script.js"></script>
+  <script src="contact-script.js"></script>
+  <script src="cinematic-effects.js"></script>
+</body>
+
+</html>

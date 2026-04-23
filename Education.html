@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Education - Mohit Pipaliya</title>
+  <link rel="stylesheet" href="edu-styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <nav id="top-nav">
+    <div class="nav-inner">
+      <span class="nav-logo">MOHIT PIPALIYA<span class="logo-dot">.</span></span>
+      <ul id="nav-list">
+        <li><a href="index.html#home" class="nav-link">Back to Home</a></li>
+        <li><a href="#education" class="nav-link active">Education</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="education">
+    <div class="edu-bg-glow"></div>
+    <h2 class="section-title reveal-elem">Education</h2>
+
+    <div class="edu-container">
+      <!-- School Education -->
+      <div class="edu-sub-section">
+        <h3 class="edu-sub-title"><i class="fa-solid fa-book-open"></i> School Education</h3>
+        <div class="edu-overview">
+          <div class="edu-overview-card reveal-elem">
+            <div class="edu-card-icon">📘</div>
+            <span class="edu-card-badge">Secondary School (10th)</span>
+            <div class="edu-card-school">N. R. Raut Sarvajanik Madhyamik Shala</div>
+            <div class="edu-card-degree">Nanapondha</div>
+            <div class="edu-card-year">▸ Completed in 2021</div>
+          </div>
+          <div class="edu-overview-card reveal-elem">
+            <div class="edu-card-icon">📘</div>
+            <span class="edu-card-badge">Higher Secondary (12th – Science)</span>
+            <div class="edu-card-school">DCO Sarvajanik High School</div>
+            <div class="edu-card-degree">Pardi, Gujarat</div>
+            <div class="edu-card-year">▸ Completed in 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- College Education -->
+      <div class="edu-sub-section">
+        <h3 class="edu-sub-title"><i class="fa-solid fa-graduation-cap"></i> College Education</h3>
+        <div class="edu-overview">
+          <div class="edu-overview-card edu-college-card highlighted reveal-elem">
+            <div class="edu-card-icon">🎓</div>
+            <span class="edu-card-badge">B.E. Computer Engineering</span>
+            <div class="edu-card-school">Pacific School of Engineering</div>
+            <div class="edu-card-degree">Affiliated with Gujarat Technological University (GTU)</div>
+            <div class="edu-card-year">▸ Duration: 2023 – 2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic Results -->
+    <div class="edu-results-section reveal-elem">
+      <h2 class="section-title" style="font-size:2.2rem; margin-bottom:.5rem;">Select to View Result</h2>
+      
+      <div class="edu-dropdown-wrapper">
+        <select id="edu-select">
+          <option value="" disabled selected>— Select Result —</option>
+          <option value="0">10th Standard</option>
+          <option value="1">12th Standard</option>
+          <option value="2">Semester 1</option>
+          <option value="3">Semester 2</option>
+          <option value="4">Semester 3</option>
+          <option value="5">Semester 4</option>
+          <option value="6">Semester 5</option>
+        </select>
+      </div>
+
+      <div class="results-stage" id="results-stage">
+        <canvas id="results-canvas"></canvas>
+        <div class="results-placeholder" id="results-placeholder">
+          <i class="fa-solid fa-table-list" style="font-size:3rem; color:rgba(0,255,255,0.3); display:block; margin-bottom:1rem;"></i>
+          <span>Awaiting Selection</span>
+        </div>
+        <!-- Panel container holds the exact center coordinates for the panel -->
+        <div id="panel-container">
+            <div class="results-panel glass-panel" id="results-panel" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="edu-script.js"></script>
+</body>
+</html>

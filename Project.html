@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Mohit Pipaliya</title>
+  <meta name="description" content="Game projects by Mohit Pipaliya — Legacy of Dharma, The Secret Book, Swadeshi UnderDogs." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="edu-styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three":         "https://unpkg.com/three@0.154.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ── Project page specific overrides ── */
+    body {
+      background: var(--dark, #060a14);
+      overflow-x: hidden;
+    }
+
+    /* Make nav always visible (no hero animation on this page) */
+    #top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      z-index: 200;
+    }
+
+    /* Projects section fills the full page */
+    .projects-section {
+      padding-top: 80px;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body id="projects-page">
+
+  <!-- NAVBAR -->
+  <nav id="top-nav">
+    <div class="nav-inner">
+      <span class="nav-logo">MOHIT PIPALIYA<span class="logo-dot">.</span></span>
+      <ul id="nav-list">
+        <li><a href="index.html#home"         class="nav-link">Home</a></li>
+        <li><a href="index.html#about"        class="nav-link">About Me</a></li>
+        <li><a href="index.html#tech-skills"  class="nav-link">Technical Skills</a></li>
+        <li><a href="index.html#soft-skills"  class="nav-link">Soft Skills</a></li>
+        <li><a href="index.html#education"    class="nav-link">Education</a></li>
+        <li><a href="#projects"               class="nav-link active-page">Projects</a></li>
+        <li><a href="index.html#achievements" class="nav-link">Achievements</a></li>
+        <li><a href="index.html#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="index.html#contact"      class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       PROJECTS SECTION
+  ══════════════════════════════════════════════ -->
+  <section id="projects" class="projects-section">
+    <div class="projects-bg">
+      <div class="projects-fog"></div>
+      <div class="projects-aurora aurora-a"></div>
+      <div class="projects-aurora aurora-b"></div>
+      <div class="projects-depth-layer layer-a"></div>
+      <div class="projects-depth-layer layer-b"></div>
+      <div class="projects-depth-layer layer-c"></div>
+      <div class="projects-shimmer-grid"></div>
+      <div id="projects-particles" aria-hidden="true"></div>
+    </div>
+
+    <div class="projects-scroll-indicator" aria-hidden="true">
+      <span class="indicator-label">WORLD PATH</span>
+      <div class="indicator-line">
+        <span class="indicator-progress"></span>
+      </div>
+      <div class="indicator-dots">
+        <button class="indicator-dot is-active" data-world-dot="0" aria-label="Legacy of Dharma"></button>
+        <button class="indicator-dot"           data-world-dot="1" aria-label="The Secret Book"></button>
+        <button class="indicator-dot"           data-world-dot="2" aria-label="Swadeshi UnderDogs"></button>
+      </div>
+    </div>
+
+    <div class="projects-camera-stage">
+      <header class="projects-header" data-reveal>
+        <span class="projects-kicker">Signature Work Showcase</span>
+        <h1 class="projects-title glitch-text" data-text="PROJECTS">PROJECTS</h1>
+        <p class="projects-subtitle">A Journey Through My Game Worlds</p>
+        <div class="projects-micro-stats">
+          <span><i class="fa-solid fa-gamepad"></i> Interactive Worlds</span>
+          <span><i class="fa-solid fa-cube"></i> 3D + Puzzle Flow</span>
+          <span><i class="fa-solid fa-bolt"></i> Cinematic Transitions</span>
+        </div>
+        <span class="projects-light-sweep" aria-hidden="true"></span>
+      </header>
+
+      <div class="projects-worlds">
+
+        <!-- PROJECT 1 — Legacy of Dharma -->
+        <article class="project-portal active" data-world-index="0" data-enter-direction="right">
+          <div class="project-world-bg mythology-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-media" data-video-title="Legacy of Dharma">
+              <video src="video/Legacy_Of_Dharma_Prototype_Explanation.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="project-copy">
+              <h3 class="project-name">Legacy of Dharma</h3>
+              <div class="project-tags">
+                <span>3D RPG</span>
+                <span>Story Driven</span>
+                <span>Boss Battle</span>
+              </div>
+              <p class="project-description reveal-lines">Legacy of Dharma is a story-driven mythology adventure where players guide Deva through sacred lands, solve divine puzzles, and battle an Asura in a cinematic final showdown.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>97</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2 — The Secret Book -->
+        <article class="project-portal" data-world-index="1" data-enter-direction="left">
+          <div class="project-world-bg puzzle-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content reverse">
+            <div class="project-copy">
+              <h3 class="project-name">The Secret Book</h3>
+              <div class="project-tags">
+                <span>Puzzle</span>
+                <span>Logic Based</span>
+                <span>Progression System</span>
+              </div>
+              <p class="project-description reveal-lines">The Secret Book is a mystery adventure puzzle game where each chapter unlocks new clues, hidden symbols, and logic-driven challenges in an atmospheric treasure-hunt journey.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>95</strong></span>
+              </div>
+            </div>
+            <div class="project-media" data-video-title="The Secret Book">
+              <video src="video/The Secret Book Trailer.mp4" autoplay muted loop playsinline></video>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3 — Swadeshi UnderDogs -->
+        <article class="project-portal" data-world-index="2" data-enter-direction="right">
+          <div class="project-world-bg village-bg"></div>
+          <div class="project-car-layer" aria-hidden="true">
+            <canvas class="project-car-canvas"></canvas>
+            <div class="car-reflection"></div>
+            <div class="car-neon-trail"></div>
+            <div class="car-smoke-field"></div>
+            <div class="car-smoke-burst"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-media" data-video-title="Swadeshi UnderDogs">
+              <video src="video/Swadeshi underdogs.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="project-copy">
+              <h3 class="project-name">Swadeshi UnderDogs — AntimBharat Bazaar Simulator</h3>
+              <div class="project-tags">
+                <span>Exploration</span>
+                <span>Educational</span>
+                <span>Festival Theme</span>
+              </div>
+              <p class="project-description reveal-lines">Swadeshi UnderDogs - AntimBharat Bazaar Simulator is a market-themed exploration experience where players manage local trade choices, solve progression tasks, and build a lively Swadeshi marketplace world.</p>
+              <div class="project-actions">
+                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
+                <span class="project-score">Immersion Score: <strong>94</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.projects-worlds -->
+
+      <div class="projects-next-wrap">
+        <a href="index.html#achievements" class="projects-next-link nav-link">
+          Continue To Achievements <i class="fa-solid fa-arrow-down"></i>
+        </a>
+      </div>
+    </div><!-- /.projects-camera-stage -->
+  </section>
+
+  <!-- VIDEO MODAL -->
+  <div id="video-modal" class="video-modal" aria-hidden="true">
+    <div class="video-modal-backdrop"></div>
+    <div class="video-modal-panel" role="dialog" aria-modal="true">
+      <button id="video-modal-close" class="video-modal-close" aria-label="Close video">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="video-modal-title"></div>
+      <div class="video-modal-visualizer" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <video id="video-modal-player" controls playsinline></video>
+      <div class="video-modal-progress-glow"></div>
+    </div>
+  </div>
+
+  <script type="module" src="project-script.js"></script>
+</body>
+
+</html>
