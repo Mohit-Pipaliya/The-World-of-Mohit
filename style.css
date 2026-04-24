@@ -1783,7 +1783,7 @@ body.nav-open {
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 16px;
   background: #0f172a; /* Solid background for performance */
-  transition: border-color 0.3s ease;
+  transition: all 0.15s ease-out;
 }
 
 /* ── Desktop: 2-column grid (video + text side by side) ── */
@@ -4724,7 +4724,7 @@ body.nav-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
 }
 
