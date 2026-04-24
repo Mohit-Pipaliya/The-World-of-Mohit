@@ -81,20 +81,7 @@ function initProjectsExperience() {
   let currentWorld = 0;
   let worldRevealToken = 0;
 
-  /* ── Ambient Particles ── */
-  if (particlesWrap) {
-    const count = isMobile ? 10 : 20;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('span');
-      p.className = 'projects-particle';
-      p.style.left            = `${Math.random() * 100}%`;
-      p.style.top             = `${Math.random() * 100}%`;
-      p.style.animationDuration = `${10 + Math.random() * 10}s`;
-      p.style.animationDelay  = `${Math.random() * 5}s`;
-      p.style.opacity         = `${0.1 + Math.random() * 0.3}`;
-      particlesWrap.appendChild(p);
-    }
-  }
+  /* Ambient particles removed for maximum performance */
 
   /* ── Cinematic line-by-line text reveal ── */
   document.querySelectorAll('.reveal-lines').forEach(desc => {
@@ -130,41 +117,28 @@ function initProjectsExperience() {
     }
   }
 
-  /* ── Scroll Trigger: progress indicator + portal switching ── */
-  ScrollTrigger.create({
-    trigger: projectsSection,
-    start: 'top 35%',
-    end: 'bottom 40%',
-    onToggle: ({ isActive }) => scrollIndicator?.classList.toggle('visible', isActive),
-    onUpdate: ({ progress }) => {
-      if (progressFill) progressFill.style.height = `${Math.min(progress * 100, 100)}%`;
-    }
-  });
-
+  /* ── Scroll Trigger: project activation ── */
   portals.forEach((portal, idx) => {
     ScrollTrigger.create({
       trigger: portal,
-      start: 'top 50%',
-      end: 'bottom 50%',
+      start: 'top 65%',
+      end: 'bottom 35%',
       onEnter: () => setActiveWorld(idx),
       onEnterBack: () => setActiveWorld(idx)
     });
   });
 
-
-  /* ── Dot navigation ── */
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const targetIdx = Number(dot.dataset.worldDot || 0);
-      const navH = document.getElementById('top-nav').offsetHeight;
-      const targetPortal = portals[targetIdx];
-      if (targetPortal) {
-        const top = targetPortal.getBoundingClientRect().top + window.scrollY - navH - 24;
-        window.scrollTo({ top, behavior: 'smooth' });
+  /* ── Video Link System ── */
+  document.querySelectorAll('.project-media').forEach(media => {
+    media.addEventListener('click', function() {
+      const ytId = this.dataset.youtubeId;
+      if (ytId) {
+        window.open(`https://www.youtube.com/watch?v=${ytId}`, '_blank');
       }
-      setActiveWorld(targetIdx);
     });
   });
+
+  setActiveWorld(0, true);
 
   /* ── Hover tilt + media parallax removed for performance ── */
 
@@ -178,65 +152,9 @@ function initProjectsExperience() {
     });
   }
 
-  /* ── Video Modal ── */
-  function openModal(videoEl, title) {
-    if (!modal || !modalPlayer) return;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    modalPlayer.src = videoEl.currentSrc || videoEl.src;
-    modalPlayer.currentTime = videoEl.currentTime || 0;
-    modalPlayer.play().catch(() => {});
-    if (modalTitle) modalTitle.textContent = title;
-  }
 
-  function closeModal() {
-    if (!modal || !modalPlayer) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    modalPlayer.pause();
-    modalPlayer.removeAttribute('src');
-    modalPlayer.load();
-  }
 
-  mediaCards.forEach(media => {
-    const video = media.querySelector('video');
-    if (!video) return;
-    media.addEventListener('click', () => openModal(video, media.dataset.videoTitle || 'Project Showcase'));
-  });
-
-  projectCtas.forEach(cta => {
-    const portal = cta.closest('.project-portal');
-    const video = portal?.querySelector('.project-media video');
-    const title = portal?.querySelector('.project-media')?.dataset.videoTitle || 'Project Showcase';
-    cta.addEventListener('click', () => { if (video) openModal(video, title); });
-  });
-
-  modalClose?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', e => {
-    if (e.target.classList.contains('video-modal-backdrop')) closeModal();
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal();
-  });
-
-  /* ── Custom cursor glow ── */
-  if (!isMobile) {
-    const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor-glow';
-    document.body.appendChild(cursor);
-    document.addEventListener('mousemove', e => {
-      cursor.style.transform = `translate(${e.clientX - 11}px, ${e.clientY - 11}px)`;
-      if (projectsSection.contains(e.target)) {
-        const rect = projectsSection.getBoundingClientRect();
-        const lx = ((e.clientX - rect.left) / rect.width) * 100;
-        const ly = ((e.clientY - rect.top) / rect.height) * 100;
-        projectsSection.style.setProperty('--mx', `${Math.max(0, Math.min(100, lx))}%`);
-        projectsSection.style.setProperty('--my', `${Math.max(0, Math.min(100, ly))}%`);
-      }
-    });
-    document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
-    document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
-  }
+  /* ── Custom cursor removed for performance ── */
 
 
 
@@ -244,80 +162,6 @@ function initProjectsExperience() {
   setActiveWorld(0, true);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   HOLOGRAPHIC GATEWAY — Entrance Reveal + Interactivity
-════════════════════════════════════════════════════════════════ */
-function initGatewayExperience() {
-  const gateway = document.querySelector('.project-gateway');
-  if (!gateway) return;
-
-  /* ── Scroll-reveal entrance (IntersectionObserver) ── */
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          gateway.classList.add('gateway-revealed');
-          animateCounters();
-          io.unobserve(gateway);
-        }
-      });
-    },
-    { threshold: 0.25 }
-  );
-  io.observe(gateway);
-
-  /* Trigger immediately if already in view (e.g. Project.html top load) */
-  const rect = gateway.getBoundingClientRect();
-  if (rect.top < window.innerHeight * 0.85) {
-    gateway.classList.add('gateway-revealed');
-    animateCounters();
-  }
-
-  /* ── Animated number counters for stat strip ── */
-  function animateCounters() {
-    gateway.querySelectorAll('.gateway-stat-num').forEach(el => {
-      const raw   = el.textContent.trim();
-      const hasPlus = raw.endsWith('+');
-      const target  = parseInt(raw, 10);
-      if (isNaN(target)) return;
-      let start = null;
-      const duration = 900;
-      function step(ts) {
-        if (!start) start = ts;
-        const progress = Math.min((ts - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-        el.textContent = Math.round(ease * target) + (hasPlus ? '+' : '');
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  }
-
-  /* ── Mouse parallax on orb stage (desktop only) ── */
-  const orbStage = gateway.querySelector('.gateway-orb-stage');
-  if (!orbStage || window.innerWidth <= 768) return;
-
-  const section = document.getElementById('projects') || document.querySelector('.projects-section');
-  if (section) {
-    section.addEventListener('mousemove', e => {
-      const r  = gateway.getBoundingClientRect();
-      const cx = r.left + r.width  / 2;
-      const cy = r.top  + r.height / 2;
-      const dx = (e.clientX - cx) / (window.innerWidth  / 2);
-      const dy = (e.clientY - cy) / (window.innerHeight / 2);
-      gsap.to(orbStage, {
-        rotateY:  dx * 18,
-        rotateX: -dy * 12,
-        duration: 0.6,
-        ease: 'power2.out',
-        transformPerspective: 800
-      });
-    });
-    section.addEventListener('mouseleave', () => {
-      gsap.to(orbStage, { rotateY: 0, rotateX: 0, duration: 0.8, ease: 'elastic.out(1, 0.6)' });
-    });
-  }
-}
+/* Gateway Logic Removed */
 
 initProjectsExperience();
-initGatewayExperience();

@@ -1695,27 +1695,38 @@ body.nav-open {
   animation: lightSweep 7s ease-in-out infinite;
 }
 
-
-
 .projects-worlds {
-  position: relative;
-  perspective: 1400px;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: 4rem;
+  padding: 4rem 0;
 }
 
 .project-portal {
+  width: 100%;
   position: relative;
   opacity: 1;
-  transform: none;
-  transition: filter 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  will-change: transform, filter;
-  contain: layout style;
-  min-height: 400px; /* Prevent collapse */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.project-portal:not(.active) .project-content {
+  opacity: 0.85;
+  filter: brightness(0.9);
+  transform: scale(0.99);
+}
+
+.project-portal.active .project-content {
+  opacity: 1;
+  filter: brightness(1.1);
+  transform: scale(1);
+}
+
+@media (min-width: 900px) {
+  .project-portal {
+    flex: 0 0 75%;
+  }
 }
 
 .project-portal::before {
@@ -1723,14 +1734,14 @@ body.nav-open {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid rgba(148, 163, 184, 0.24);
+  border: 1px solid rgba(148, 163, 184, 0.15);
   pointer-events: none;
   z-index: 4;
 }
 
 .project-portal.active {
-  transform: translateY(-3px) scale(1.005);
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5), 0 0 28px rgba(56, 189, 248, 0.16);
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
 .project-portal.dimmed {
@@ -1768,84 +1779,117 @@ body.nav-open {
   flex-direction: column;
   align-items: stretch;
   gap: 1.5rem;
-  min-height: auto;
-  padding: 1.6rem 2rem;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 20px;
-  background: linear-gradient(160deg, rgba(15, 23, 42, 0.72), rgba(17, 24, 39, 0.78));
-  box-shadow: 0 16px 40px rgba(2, 8, 23, 0.7);
-  transform-style: preserve-3d;
-  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+  padding: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 16px;
+  background: #0f172a; /* Solid background for performance */
+  transition: border-color 0.3s ease;
 }
 
 /* ── Desktop: 2-column grid (video + text side by side) ── */
 @media (min-width: 900px) {
   .project-content {
     display: grid;
-    grid-template-columns: 46% 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 2rem;
-  }
-  .project-content.reverse {
-    grid-template-columns: 1fr 46%;
-  }
-  /* In reverse layout text is already first in HTML, so media auto-goes right */
-  .project-content.reverse .project-media {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .project-content.reverse .project-copy {
-    grid-column: 1;
-    grid-row: 1;
+    gap: 3rem;
   }
 }
 
+/* Mobile: Always fully visible, no scroll effects */
 .project-portal .project-content {
   opacity: 1;
+  filter: none;
   transform: none;
-  transition: opacity 0.3s ease;
 }
 
-.project-portal:not(.active) .project-content {
-  opacity: 0.6;
-  filter: grayscale(0.5);
-  transform: scale(0.98);
+/* Desktop: Scroll-activation effects */
+@media (min-width: 992px) {
+  .project-portal:not(.active) .project-content {
+    opacity: 0.6;
+    filter: grayscale(0.5);
+    transform: scale(0.98);
+  }
+  
+  .project-portal.active .project-content {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+  }
 }
 
 .project-content.reverse {
   /* reversed via grid on desktop */
 }
 
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.4), #0f172a);
+  gap: 0.8rem;
+  z-index: 3;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.video-placeholder i {
+  font-size: 2.8rem;
+  color: #22d3ee;
+  text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.video-placeholder span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.project-media:hover .video-placeholder i {
+  transform: scale(1.15);
+}
+
+.project-media iframe,
+.project-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: none;
+}
+
 .project-media {
   position: relative;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.12);
-  background: #020617; /* Dark fallback */
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: #000;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 350px;
+  max-height: 400px;
 }
 
 .project-media::after {
   content: attr(data-video-title);
   position: absolute;
-  left: 14px;
-  bottom: 14px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 700;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: #fff;
-  background: rgba(15, 23, 42, 0.85);
-  border-left: 3px solid #22d3ee;
-  z-index: 10;
-  backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.9);
+  border-left: 2px solid #22d3ee;
+  z-index: 5;
 }
 
 .project-status-tag {
@@ -1927,7 +1971,7 @@ body.nav-open {
   object-fit: cover;
   filter: saturate(1.05) contrast(1.06);
   transition: transform 0.6s ease, filter 0.6s ease;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .youtube-click-overlay {
@@ -1943,35 +1987,7 @@ body.nav-open {
   filter: saturate(1.2) contrast(1.1) brightness(1.1);
 }
 
-.project-media::before {
-  content: '\f04b'; /* FontAwesome Play Icon */
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  width: 60px;
-  height: 60px;
-  background: rgba(34, 211, 238, 0.9);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  z-index: 15;
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.6);
-  pointer-events: none;
-  padding-left: 5px; /* Visual centering for play icon */
-}
-
-.project-media:hover::before {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
+/* Project Media Play Symbol Removed */
 
 .project-media:hover {
   border-color: #22d3ee;
@@ -2113,11 +2129,39 @@ body.nav-open {
 }
 
 .project-actions {
-  margin-top: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.youtube-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.youtube-link:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.youtube-link i {
+  font-size: 1rem;
 }
 
 .project-cta {
@@ -2157,6 +2201,58 @@ body.nav-open {
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.65);
 }
 
+.project-selection-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0 3rem;
+  opacity: 0.8;
+}
+
+.selection-line {
+  flex: 1;
+  height: 1px;
+  max-width: 150px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.4), transparent);
+}
+
+.selection-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #22d3ee;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22d3ee;
+}
+
+.status-dot.pulse {
+  animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.status-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: #22d3ee;
+  text-transform: uppercase;
+}
+
 .project-description .line {
   display: block;
   opacity: 0.9;
@@ -2171,127 +2267,7 @@ body.nav-open {
    HOLOGRAPHIC GAME WORLD PORTAL GATEWAY
    Replaces the old car 3D animation
 ═══════════════════════════════════════════════ */
-.project-gateway {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0 1.5rem;
-  z-index: 1;
-  overflow: visible;
-  pointer-events: none;
-  margin-bottom: 0.5rem;
-  min-height: 250px;
-}
-
-/* ── Central orb stage ── */
-.gateway-orb-stage {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ── Core energy pulse ── */
-.gateway-core {
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #22d3ee 0%, #6366f1 70%);
-  box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
-  animation: coreBreath 4s ease-in-out infinite;
-  z-index: 4;
-}
-
-.gateway-core::before {
-  content: '\f11b'; /* Font Awesome gamepad */
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
-  color: #fff;
-  text-shadow: 0 0 16px rgba(34, 211, 238, 1);
-  animation: iconSpin 8s ease-in-out infinite alternate;
-}
-
-@keyframes coreBreath {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 24px rgba(34,211,238,0.9), 0 0 55px rgba(99,102,241,0.6), 0 0 90px rgba(34,211,238,0.3); }
-  50%       { transform: scale(1.14); box-shadow: 0 0 40px rgba(34,211,238,1), 0 0 80px rgba(99,102,241,0.8), 0 0 140px rgba(34,211,238,0.4); }
-}
-
-@keyframes iconSpin {
-  0%   { content: '\f11b'; }   /* gamepad */
-  100% { content: '\f11b'; }
-}
-
-/* ── Rotating rings ── */
-.gateway-ring {
-  position: absolute;
-  border-radius: 50%;
-  border-style: solid;
-  border-color: transparent;
-  pointer-events: none;
-}
-
-.gateway-ring-1 {
-  width: 110px;
-  height: 110px;
-  border-width: 2px;
-  border-top-color: rgba(34, 211, 238, 0.85);
-  border-right-color: rgba(34, 211, 238, 0.25);
-  animation: ringRotate 3.5s linear infinite;
-  /* Removed box-shadow glow — border glow is sufficient */
-  will-change: transform;
-}
-
-.gateway-ring-2 {
-  width: 155px;
-  height: 155px;
-  border-width: 1.5px;
-  border-top-color: rgba(168, 85, 247, 0.75);
-  border-left-color: rgba(168, 85, 247, 0.3);
-  animation: ringRotate 5.5s linear infinite reverse;
-  /* Removed box-shadow glow */
-  will-change: transform;
-}
-
-.gateway-ring-3 {
-  width: 205px;
-  height: 205px;
-  border-width: 1px;
-  border-top-color: rgba(56, 189, 248, 0.45);
-  border-bottom-color: rgba(99, 102, 241, 0.45);
-  animation: ringRotate 9s linear infinite;
-  /* Removed filter:blur — not worth the GPU cost */
-  will-change: transform;
-}
-
-@keyframes ringRotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ── Orbiting dots ── */
-.gateway-orbit-dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22d3ee;
-  box-shadow: 0 0 14px rgba(34, 211, 238, 0.9), 0 0 28px rgba(34, 211, 238, 0.5);
-  top: 50%;
-  left: 50%;
-  transform-origin: 0 0;
-  z-index: 3;
-}
+/* Project Gateway Styles Removed */
 
 .gateway-orbit-dot:nth-child(1) { animation: orbitDot1 3.5s linear infinite; background: #22d3ee; }
 .gateway-orbit-dot:nth-child(2) { animation: orbitDot2 5.5s linear infinite; background: #a855f7; box-shadow: 0 0 14px rgba(168,85,247,0.9); }
@@ -2469,8 +2445,8 @@ body.nav-open {
 .project-gateway.gateway-revealed .gateway-stat:nth-child(3) { animation-delay: 0.41s; }
 
 @keyframes gatewayEnter {
-  from { opacity: 0; transform: scale(0.7) translateY(20px); filter: blur(8px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  from { opacity: 0; transform: scale(0.7) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes statFadeUp {
@@ -3758,7 +3734,7 @@ body.nav-open {
 
   .project-portal:not(.active) .project-content {
     opacity: 0.4;
-    filter: brightness(0.5) blur(2px);
+    filter: brightness(0.5);
     transform: scale(0.95);
   }
 
@@ -4730,6 +4706,30 @@ body.nav-open {
 
 #game-avatar.pop {
   animation: avatarPop 0.32s ease forwards;
+}
+
+.project-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.project-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  display: block;
+}
+
+.project-media:hover .project-preview-img {
+  transform: scale(1.08);
 }
 
 @keyframes avatarPop {

@@ -107,45 +107,14 @@
         <span class="projects-light-sweep" aria-hidden="true"></span>
       </header>
 
-      <!-- ══ HOLOGRAPHIC GAME WORLD PORTAL ══ -->
-      <div class="project-gateway" aria-hidden="true">
-        <div class="gateway-scanline"></div>
-        <div class="gateway-float-icons">
-          <div class="gateway-icon-orb"><i class="fa-solid fa-gamepad"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-cube"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-trophy"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-bolt"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-dragon"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <!-- ══ CLEAN PROJECT SELECTION HEADER ══ -->
+      <div class="project-selection-header">
+        <div class="selection-line"></div>
+        <div class="selection-status">
+          <span class="status-dot pulse"></span>
+          <span class="status-text">Select A World To Explore</span>
         </div>
-        <div class="gateway-orb-stage">
-          <div class="gateway-wave"></div>
-          <div class="gateway-wave"></div>
-          <div class="gateway-wave"></div>
-          <div class="gateway-ring gateway-ring-3"></div>
-          <div class="gateway-ring gateway-ring-2"></div>
-          <div class="gateway-ring gateway-ring-1"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-core"></div>
-        </div>
-        <div class="gateway-stats">
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">03</span>
-            <span class="gateway-stat-label">Game Worlds</span>
-          </div>
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">2+</span>
-            <span class="gateway-stat-label">Years Unity</span>
-          </div>
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">97</span>
-            <span class="gateway-stat-label">Top Immersion</span>
-          </div>
-        </div>
-        <div class="gateway-connector"></div>
+        <div class="selection-line"></div>
       </div>
 
       <div class="projects-worlds">
@@ -155,10 +124,8 @@
           <div class="project-world-bg mythology-bg"></div>
 
           <div class="project-content">
-            <div class="project-media" data-video-title="Legacy of Dharma">
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <video src="video/Legacy_Of_Dharma_Prototype_Explanation.mp4" autoplay muted loop playsinline></video>
+            <div class="project-media" data-video-title="Legacy of Dharma" data-youtube-id="orFOANP4BqA">
+              <img src="video/Legacy of Dharma .png" alt="Legacy of Dharma" class="project-preview-img">
             </div>
             <div class="project-copy">
               <h3 class="project-name">Legacy of Dharma</h3>
@@ -169,7 +136,6 @@
               </div>
               <p class="project-description reveal-lines">Legacy of Dharma is a story-driven mythology adventure where players guide Deva through sacred lands, solve divine puzzles, and battle an Asura in a cinematic final showdown.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>97</strong></span>
               </div>
             </div>
@@ -190,14 +156,11 @@
               </div>
               <p class="project-description reveal-lines">The Secret Book is a mystery adventure puzzle game where each chapter unlocks new clues, hidden symbols, and logic-driven challenges in an atmospheric treasure-hunt journey.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>95</strong></span>
               </div>
             </div>
-            <div class="project-media" data-video-title="The Secret Book">
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <video src="video/The Secret Book Trailer.mp4" autoplay muted loop playsinline></video>
+            <div class="project-media" data-video-title="The Secret Book" data-youtube-id="2ovd4qtxZB4">
+              <img src="video/The Screat Book .jpg" alt="The Secret Book" class="project-preview-img">
             </div>
           </div>
         </article>
@@ -207,10 +170,8 @@
           <div class="project-world-bg village-bg"></div>
 
           <div class="project-content">
-            <div class="project-media" data-video-title="Swadeshi UnderDogs">
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <video src="video/Swadeshi underdogs.mp4" autoplay muted loop playsinline></video>
+            <div class="project-media" data-video-title="Swadeshi UnderDogs" data-youtube-id="UwRrp5GbErk">
+              <img src="video/Swadeshi Underdogs.jpeg" alt="Swadeshi UnderDogs" class="project-preview-img">
             </div>
             <div class="project-copy">
               <h3 class="project-name">Swadeshi UnderDogs — AntimBharat Bazaar Simulator</h3>
@@ -221,7 +182,6 @@
               </div>
               <p class="project-description reveal-lines">Swadeshi UnderDogs - AntimBharat Bazaar Simulator is a market-themed exploration experience where players manage local trade choices, solve progression tasks, and build a lively Swadeshi marketplace world.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>94</strong></span>
               </div>
             </div>
@@ -238,21 +198,7 @@
     </div><!-- /.projects-camera-stage -->
   </section>
 
-  <!-- VIDEO MODAL -->
-  <div id="video-modal" class="video-modal" aria-hidden="true">
-    <div class="video-modal-backdrop"></div>
-    <div class="video-modal-panel" role="dialog" aria-modal="true">
-      <button id="video-modal-close" class="video-modal-close" aria-label="Close video">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <div class="video-modal-title"></div>
-      <div class="video-modal-visualizer" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <video id="video-modal-player" controls playsinline></video>
-      <div class="video-modal-progress-glow"></div>
-    </div>
-  </div>
+
 
   <script type="module" src="project-script.js"></script>
 </body>

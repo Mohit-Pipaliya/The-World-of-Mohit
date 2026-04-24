@@ -504,24 +504,12 @@
       <div id="projects-particles" aria-hidden="true"></div>
     </div>
 
-    <div class="projects-scroll-indicator" aria-hidden="true">
-      <span class="indicator-label">WORLD PATH</span>
-      <div class="indicator-line">
-        <span class="indicator-progress"></span>
-      </div>
-      <div class="indicator-dots">
-        <button class="indicator-dot is-active" data-world-dot="0" aria-label="Legacy of Dharma"></button>
-        <button class="indicator-dot" data-world-dot="1" aria-label="The Secret Book"></button>
-        <button class="indicator-dot" data-world-dot="2" aria-label="Swadeshi UnderDogs"></button>
-      </div>
-    </div>
-
     <div class="projects-camera-stage">
       <header class="projects-header" data-reveal>
         <span class="projects-kicker">Signature Work Showcase</span>
         <h2 class="projects-title glitch-text" data-text="PROJECTS">PROJECTS</h2>
         <p class="projects-subtitle">A Journey Through My Game Worlds</p>
-        <div class="projects-micro-stats">
+              <div class="projects-micro-stats">
           <span><i class="fa-solid fa-gamepad"></i> Interactive Worlds</span>
           <span><i class="fa-solid fa-cube"></i> 3D + Puzzle Flow</span>
           <span><i class="fa-solid fa-bolt"></i> Cinematic Transitions</span>
@@ -529,73 +517,22 @@
         <span class="projects-light-sweep" aria-hidden="true"></span>
       </header>
 
-      <!-- ══ HOLOGRAPHIC GAME WORLD PORTAL ══ -->
-      <div class="project-gateway" aria-hidden="true">
-        <!-- Scan-line sweep -->
-        <div class="gateway-scanline"></div>
-
-        <!-- Floating icon orbs (corners & sides) -->
-        <div class="gateway-float-icons">
-          <div class="gateway-icon-orb"><i class="fa-solid fa-gamepad"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-cube"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-trophy"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-bolt"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-dragon"></i></div>
-          <div class="gateway-icon-orb"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <!-- ══ CLEAN PROJECT SELECTION HEADER ══ -->
+      <div class="project-selection-header">
+        <div class="selection-line"></div>
+        <div class="selection-status">
+          <span class="status-dot pulse"></span>
+          <span class="status-text">Select A World To Explore</span>
         </div>
-
-        <!-- Central orb stage -->
-        <div class="gateway-orb-stage">
-          <!-- Energy wave pulses -->
-          <div class="gateway-wave"></div>
-          <div class="gateway-wave"></div>
-          <div class="gateway-wave"></div>
-
-          <!-- Rotating rings -->
-          <div class="gateway-ring gateway-ring-3"></div>
-          <div class="gateway-ring gateway-ring-2"></div>
-          <div class="gateway-ring gateway-ring-1"></div>
-
-          <!-- Orbiting dots -->
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-          <div class="gateway-orbit-dot"></div>
-
-          <!-- Core glowing orb -->
-          <div class="gateway-core"></div>
-        </div>
-
-        <!-- Stats strip -->
-        <div class="gateway-stats">
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">03</span>
-            <span class="gateway-stat-label">Game Worlds</span>
-          </div>
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">2+</span>
-            <span class="gateway-stat-label">Years Unity</span>
-          </div>
-          <div class="gateway-stat">
-            <span class="gateway-stat-num">97</span>
-            <span class="gateway-stat-label">Top Immersion</span>
-          </div>
-        </div>
-
-        <!-- Connector to projects below -->
-        <div class="gateway-connector"></div>
+        <div class="selection-line"></div>
       </div>
 
       <div class="projects-worlds">
-        <article class="project-portal" data-world-index="0" data-enter-direction="right">
-          <div class="project-world-bg mythology-bg"></div>
-
+        <!-- PROJECT 1 — Legacy of Dharma -->
+        <article class="project-portal" data-world-index="0">
           <div class="project-content">
             <div class="project-media" data-video-title="Legacy of Dharma" data-youtube-id="orFOANP4BqA">
-              <div class="youtube-click-overlay"></div>
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <iframe src="https://www.youtube.com/embed/orFOANP4BqA?mute=1&controls=0&modestbranding=1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" tabindex="-1"></iframe>
+              <img src="video/Legacy of Dharma .png" alt="Legacy of Dharma" class="project-preview-img">
             </div>
             <div class="project-copy">
               <h3 class="project-name">Legacy of Dharma</h3>
@@ -608,17 +545,21 @@
                 players guide Deva through sacred lands, solve divine puzzles, and battle an Asura in a cinematic final
                 showdown.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>97</strong></span>
+                <a href="https://www.youtube.com/watch?v=orFOANP4BqA" target="_blank" class="youtube-link">
+                  <i class="fa-brands fa-youtube"></i> View on YouTube
+                </a>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="project-portal" data-world-index="1" data-enter-direction="left">
-          <div class="project-world-bg puzzle-bg"></div>
-
-          <div class="project-content reverse">
+        <!-- PROJECT 2 — The Secret Book -->
+        <article class="project-portal" data-world-index="1">
+          <div class="project-content">
+            <div class="project-media" data-video-title="The Secret Book" data-youtube-id="2ovd4qtxZB4">
+              <img src="video/The Screat Book .jpg" alt="The Secret Book" class="project-preview-img">
+            </div>
             <div class="project-copy">
               <h3 class="project-name">The Secret Book</h3>
               <div class="project-tags">
@@ -630,28 +571,20 @@
                 chapter unlocks new clues, hidden symbols, and logic-driven challenges in an atmospheric treasure-hunt
                 journey.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>95</strong></span>
+                <a href="https://www.youtube.com/watch?v=2ovd4qtxZB4" target="_blank" class="youtube-link">
+                  <i class="fa-brands fa-youtube"></i> View on YouTube
+                </a>
               </div>
-            </div>
-            <div class="project-media" data-video-title="The Secret Book" data-youtube-id="2ovd4qtxZB4">
-              <div class="youtube-click-overlay"></div>
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <iframe src="https://www.youtube.com/embed/2ovd4qtxZB4?mute=1&controls=0&modestbranding=1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" tabindex="-1"></iframe>
             </div>
           </div>
         </article>
 
-        <article class="project-portal" data-world-index="2" data-enter-direction="right">
-          <div class="project-world-bg village-bg"></div>
-
+        <!-- PROJECT 3 — Swadeshi UnderDogs -->
+        <article class="project-portal" data-world-index="2">
           <div class="project-content">
             <div class="project-media" data-video-title="Swadeshi UnderDogs" data-youtube-id="UwRrp5GbErk">
-              <div class="youtube-click-overlay"></div>
-              <div class="project-status-tag">Live Preview</div>
-              <div class="project-shimmer"></div>
-              <iframe src="https://www.youtube.com/embed/UwRrp5GbErk?mute=1&controls=0&modestbranding=1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" tabindex="-1"></iframe>
+              <img src="video/Swadeshi Underdogs.jpeg" alt="Swadeshi UnderDogs" class="project-preview-img">
             </div>
             <div class="project-copy">
               <h3 class="project-name">Swadeshi UnderDogs - AntimBharat Bazaar Simulator</h3>
@@ -664,8 +597,10 @@
                 market-themed exploration experience where players manage local trade choices, solve progression tasks,
                 and build a lively Swadeshi marketplace world.</p>
               <div class="project-actions">
-                <button type="button" class="project-cta primary" data-video-open>Watch Gameplay</button>
                 <span class="project-score">Immersion Score: <strong>94</strong></span>
+                <a href="https://www.youtube.com/watch?v=UwRrp5GbErk" target="_blank" class="youtube-link">
+                  <i class="fa-brands fa-youtube"></i> View on YouTube
+                </a>
               </div>
             </div>
           </div>
@@ -680,19 +615,7 @@
     </div>
   </section>
 
-  <!-- Project Video Fullscreen Modal -->
-  <div id="project-video-modal" class="video-modal-root" aria-hidden="true">
-    <div class="video-modal-backdrop"></div>
-    <div class="video-modal-content">
-      <button class="video-modal-close" aria-label="Close Video"><i class="fa-solid fa-xmark"></i></button>
-      <div class="video-container" id="modal-video-container">
-        <!-- iframe injected via JS -->
-      </div>
-      <div class="video-modal-footer">
-        <h3 id="modal-video-title">Project Gameplay</h3>
-      </div>
-    </div>
-  </div>
+
 
   <!-- SPEEDOMETER ARC ACHIEVEMENTS SECTION -->
   <section id="achievements" class="arc-achievements-section">

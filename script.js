@@ -47,9 +47,7 @@ let currentBgX = 0;
 let currentBgY = 0;
 
 window.addEventListener('mousemove', (e) => {
-    // Calculate mouse position relative to center (-25px to 25px range)
-    targetMouseX = (e.clientX / window.innerWidth - 0.5) * 50;
-    targetMouseY = (e.clientY / window.innerHeight - 0.5) * 50;
+    // Parallax disabled for performance
 });
 
 /* ════════════════════════════════════════════════════════════════
@@ -199,27 +197,7 @@ function cleanRemoveModels() {
    REALISTIC ATMOSPHERIC DUST
 ════════════════════════════════════════════════════════════════ */
 let dustParticles;
-function createDust() {
-    const particleCount = 600;
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array(particleCount * 3);
-    for(let i=0; i < particleCount * 3; i++) {
-        pos[i] = (Math.random() - 0.5) * 40; // Spread across scene
-    }
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    
-    const mat = new THREE.PointsMaterial({
-        color: 0x90c0ff, // Magical blue-white dust
-        size: 0.05,
-        transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-    });
-    
-    dustParticles = new THREE.Points(geo, mat);
-    scene.add(dustParticles);
-}
+/* Dust Particles Removed for performance */
 
 /* ════════════════════════════════════════════════════════════════
    LOOP
@@ -291,7 +269,6 @@ function initNavbarMobile() {
 
 async function boot() {
     initNavbarMobile();
-    createDust(); // Add atmospheric dust
     await loadTextures(); // Ensure all 4 textures are loaded before applying
     await Promise.all([
         loadModel('idle', '3d-model/Breathing Idle.glb'),
