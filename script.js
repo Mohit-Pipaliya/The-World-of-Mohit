@@ -669,11 +669,7 @@ function initProjectsExperience() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = window.innerWidth <= 991;
   let currentWorld = 0;
-  const portalCarControllers = new Map();
-  let carBusy = false;
-  let pendingWorldIndex = null;
   let worldRevealToken = 0;
-  const carAnimPlayed = new Set(); // tracks which portals have had car animation
 
   // Ambient particles for futuristic depth.
   if (particlesWrap) {
@@ -703,110 +699,74 @@ function initProjectsExperience() {
   });
 
   function setActiveWorld(index, instantReveal = false) {
-    // Only return if we are already in the process of revealing this world to avoid overlap
-    if (!instantReveal && index === currentWorld && carBusy) {
-      return;
-    }
-
     const revealToken = ++worldRevealToken;
     currentWorld = index;
+    
     portals.forEach((portal, i) => {
       portal.classList.toggle('active', i === index);
       portal.classList.toggle('dimmed', i !== index);
-      // ALWAYS remove content-visible when world is not active or when switching
       if (i !== index) {
         portal.classList.remove('content-visible');
       }
     });
+    
     dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
 
-    const revealPortalContent = () => {
-      if (revealToken !== worldRevealToken) return;
-      const activePortal = portals[index];
-      if (!activePortal) return;
-      activePortal.classList.add('content-visible');
+    const activePortal = portals[index];
+    if (!activePortal) return;
+    
+    activePortal.classList.add('content-visible');
+    
+    if (!isMobile && !prefersReducedMotion) {
       const activeLines = activePortal.querySelectorAll('.project-description .line');
       gsap.fromTo(activeLines,
         { opacity: 0.2, y: 16 },
         { opacity: 1, y: 0, duration: 0.5, stagger: 0.09, ease: 'power3.out', overwrite: true }
       );
-    };
-
-    portals[index]?.classList.remove('content-visible');
-
-    if (!instantReveal && !isMobile && !prefersReducedMotion) {
-      if (carBusy) {
-        if (pendingWorldIndex !== index) pendingWorldIndex = index;
-        return;
-      }
-
-      const controller = portalCarControllers.get(index);
-      if (controller) {
-        carBusy = true;
-        const direction = portals[index].dataset.enterDirection || 'right';
-        controller.run(direction, portals[index]).finally(() => {
-          carBusy = false;
-          // Removed carAnimPlayed check to allow repeatable animation
-          revealPortalContent();
-          if (pendingWorldIndex !== null && pendingWorldIndex !== index) {
-            const nextIdx = pendingWorldIndex;
-            pendingWorldIndex = null;
-            setActiveWorld(nextIdx);
-          }
-        });
-        return;
-      }
-    }
-
-    revealPortalContent();
-  }
-
-  // Side progress indicator + portal focus mode.
-  if (!isMobile) {
-    ScrollTrigger.create({
-      trigger: projectsSection,
-      start: 'top 35%',
-      end: 'bottom 40%',
-      onToggle: ({ isActive }) => scrollIndicator?.classList.toggle('visible', isActive),
-      onUpdate: ({ progress }) => {
-        if (progressFill) progressFill.style.height = `${Math.min(progress * 100, 100)}%`;
-      },
-      onLeave: () => {
-        // Reset all portals when leaving section so they re-animate on return
-        portals.forEach(p => p.classList.remove('content-visible'));
-        currentWorld = -1; 
-      },
-      onLeaveBack: () => {
-        portals.forEach(p => p.classList.remove('content-visible'));
-        currentWorld = -1;
-      }
-    });
-
-    portals.forEach((portal, idx) => {
-      ScrollTrigger.create({
-        trigger: portal,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        onEnter: () => setActiveWorld(idx),
-        onEnterBack: () => setActiveWorld(idx),
-        onRefresh: (self) => {
-          if (self.isActive && currentWorld !== idx) {
-            setActiveWorld(idx);
-          }
-        }
-      });
-    });
-  } else {
-    portals.forEach((portal) => {
-      portal.classList.add('active');
-      portal.classList.remove('dimmed');
-      const lines = portal.querySelectorAll('.project-description .line');
+    } else {
+      const lines = activePortal.querySelectorAll('.project-description .line');
       lines.forEach((line) => {
         line.style.opacity = '1';
         line.style.transform = 'none';
       });
-    });
+    }
   }
+
+  // Side progress indicator + portal focus mode.
+  ScrollTrigger.create({
+    trigger: projectsSection,
+    start: 'top 35%',
+    end: 'bottom 40%',
+    onToggle: ({ isActive }) => scrollIndicator?.classList.toggle('visible', isActive),
+    onUpdate: ({ progress }) => {
+      if (progressFill) progressFill.style.height = `${Math.min(progress * 100, 100)}%`;
+    },
+    onLeave: () => {
+      // Reset all portals when leaving section so they re-animate on return
+      portals.forEach(p => p.classList.remove('content-visible'));
+      currentWorld = -1; 
+    },
+    onLeaveBack: () => {
+      portals.forEach(p => p.classList.remove('content-visible'));
+      currentWorld = -1;
+    }
+  });
+
+  portals.forEach((portal, idx) => {
+    ScrollTrigger.create({
+      trigger: portal,
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: () => setActiveWorld(idx),
+      onEnterBack: () => setActiveWorld(idx),
+      onRefresh: (self) => {
+        if (self.isActive && currentWorld !== idx) {
+          setActiveWorld(idx);
+        }
+      }
+    });
+  });
+
 
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
@@ -888,272 +848,8 @@ function initProjectsExperience() {
     document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
   }
 
-  // 3D car world-transition controller (separate for each project box).
-  if (!isMobile && !prefersReducedMotion) {
-    const carModelCandidates = ['3d-model/Car for portfolio.glb', '3d-model/portfolio.glb'];
-
-    portals.forEach((portal, portalIndex) => {
-      const carLayer = portal.querySelector('.project-car-layer');
-      const carCanvas = portal.querySelector('.project-car-canvas');
-      const trail = portal.querySelector('.car-neon-trail');
-      const smokeField = portal.querySelector('.car-smoke-field');
-      const smoke = portal.querySelector('.car-smoke-burst');
-      const reflection = portal.querySelector('.car-reflection');
-
-      if (!carCanvas || !carLayer || !trail || !smokeField || !smoke || !reflection) return;
-
-      const carRenderer = new THREE.WebGLRenderer({ canvas: carCanvas, antialias: false, alpha: true, powerPreference: 'low-power' });
-      const carScene = new THREE.Scene();
-      const carCamera = new THREE.PerspectiveCamera(45, carCanvas.clientWidth / carCanvas.clientHeight, 0.1, 100);
-      carCamera.position.set(0, 1.3, 5.8);
-      carRenderer.setPixelRatio(1); // fixed 1x — best perf for a thumbnail-size canvas
-      carRenderer.setSize(carCanvas.clientWidth || window.innerWidth, carCanvas.clientHeight || window.innerHeight);
-
-      const carAmbient = new THREE.AmbientLight(0xffffff, 0.45);
-      const carKey = new THREE.DirectionalLight(0x22d3ee, 1.7);
-      carKey.position.set(2, 3, 4);
-      const headLightL = new THREE.PointLight(0x99f6ff, 0, 8, 2.1);
-      const headLightR = new THREE.PointLight(0x99f6ff, 0, 8, 2.1);
-      headLightL.position.set(-0.35, 0.25, 1.1);
-      headLightR.position.set(0.35, 0.25, 1.1);
-      carScene.add(carAmbient, carKey);
-
-      const ground = new THREE.Mesh(
-        new THREE.PlaneGeometry(6, 1.7),
-        new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.09 })
-      );
-      ground.rotation.x = -Math.PI / 2;
-      ground.position.y = -0.55;
-      carScene.add(ground);
-
-      const carPivot = new THREE.Group();
-      carScene.add(carPivot);
-      let carModel = null;
-      const tryLoadCar = (index = 0) => {
-        if (index >= carModelCandidates.length) return;
-        gltfLoader.load(carModelCandidates[index], (gltf) => {
-          carModel = gltf.scene;
-          carModel.scale.setScalar(0.92);
-          carModel.position.y = -0.35;
-          carPivot.add(carModel);
-          carPivot.add(headLightL, headLightR);
-
-          // FIX 1: Auto-trigger car animation for world 0 when model finally loads
-          if (portalIndex === currentWorld && !carBusy) {
-            carBusy = true;
-            const dir = portals[portalIndex]?.dataset.enterDirection || 'right';
-            const ctrl = portalCarControllers.get(portalIndex);
-            if (ctrl) {
-              ctrl.run(dir, portals[portalIndex]).finally(() => {
-                carBusy = false;
-                carAnimPlayed.add(portalIndex);
-                const activePortal = portals[portalIndex];
-                if (activePortal) {
-                  activePortal.classList.add('content-visible');
-                  const lines = activePortal.querySelectorAll('.project-description .line');
-                  gsap.fromTo(lines,
-                    { opacity: 0.2, y: 16 },
-                    { opacity: 1, y: 0, duration: 0.5, stagger: 0.09, ease: 'power3.out' }
-                  );
-                }
-                if (pendingWorldIndex !== null && pendingWorldIndex !== portalIndex) {
-                  const next = pendingWorldIndex;
-                  pendingWorldIndex = null;
-                  setActiveWorld(next);
-                }
-              });
-            } else {
-              carBusy = false;
-            }
-          }
-        }, undefined, () => tryLoadCar(index + 1));
-      };
-      tryLoadCar();
-
-      let renderActive = false;
-      let rafId = null;
-      const renderCarLoop = () => {
-        if (!renderActive) return;
-        carRenderer.render(carScene, carCamera);
-        rafId = requestAnimationFrame(renderCarLoop);
-      };
-      const startRenderLoop = () => {
-        if (renderActive) return;
-        renderActive = true;
-        renderCarLoop();
-      };
-      const stopRenderLoop = () => {
-        renderActive = false;
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-      };
-
-      window.addEventListener('resize', () => {
-        if (!carCanvas) return;
-        const w = carCanvas.clientWidth || window.innerWidth;
-        const h = carCanvas.clientHeight || window.innerHeight;
-        carCamera.aspect = w / h;
-        carCamera.updateProjectionMatrix();
-        carRenderer.setSize(w, h);
-      });
-
-      let activeTimeline = null;
-      let finalizeRun = null;
-
-      portalCarControllers.set(portalIndex, {
-        run(direction, portal) {
-          return new Promise((resolve) => {
-            if (!carModel) {
-              resolve();
-              return;
-            }
-
-            if (activeTimeline) {
-              activeTimeline.kill();
-              activeTimeline = null;
-            }
-            if (typeof finalizeRun === 'function') {
-              finalizeRun();
-            }
-
-            const movingFromRight = direction === 'right';
-            const startX = movingFromRight ?  7.0 : -7.0;   // start well off-screen
-            const stopX = movingFromRight ? -1.4 : 1.4;
-            const exitX = movingFromRight ? -9.0 : 9.0;     // FIX 2: exit far off-screen
-            const smokeRect = portal.getBoundingClientRect();
-            const smokeBaseX = Math.max(smokeRect.width * 0.42, 14);
-            const smokeBaseY = Math.max(smokeRect.height * 0.55, 12);
-
-            const emitRealisticSmoke = (burstCount = 12) => {
-              for (let i = 0; i < burstCount; i++) {
-                const puff = document.createElement('span');
-                puff.className = 'car-smoke-puff';
-                
-                // Organic variation in size and starting position
-                const size = 40 + Math.random() * 80;
-                const driftX = (movingFromRight ? 1 : -1) * (50 + Math.random() * 150);
-                const driftY = -10 - Math.random() * 80;
-                const rotate = Math.random() * 360;
-                
-                puff.style.width = `${size}px`;
-                puff.style.height = `${size}px`;
-                puff.style.left = `${smokeBaseX}px`;
-                puff.style.top = `${smokeBaseY}px`;
-                puff.style.transform = `translate(-50%, -50%) rotate(${rotate}deg)`;
-                
-                smokeField.appendChild(puff);
-
-                const tl = gsap.timeline({ onComplete: () => puff.remove() });
-                tl.fromTo(puff,
-                  { opacity: 0, scale: 0.1, x: 0, y: 0 },
-                  { 
-                    opacity: 0.7 + Math.random() * 0.3, 
-                    scale: 1.5, 
-                    duration: 0.4, 
-                    ease: 'power2.out' 
-                  }
-                );
-                tl.to(puff, {
-                  opacity: 0,
-                  scale: 3 + Math.random() * 2,
-                  x: driftX,
-                  y: driftY,
-                  duration: 1.2 + Math.random() * 0.8,
-                  ease: 'power1.out'
-                });
-              }
-            };
-
-            startRenderLoop();
-            carLayer.style.opacity = '1';
-            smokeField.innerHTML = '';
-            carPivot.position.set(startX, -0.38, 0);
-            carPivot.rotation.y = movingFromRight ? -Math.PI / 2 : Math.PI / 2;
-            headLightL.intensity = 0;
-            headLightR.intensity = 0;
-            gsap.killTweensOf([smoke, trail, reflection, headLightL, headLightR, carPivot.position]);
-            gsap.set(smoke, { opacity: 0, scale: 0.2 });
-            gsap.set(reflection, { opacity: 0.5 });
-
-            gsap.set(trail, {
-              opacity: 0.9,
-              width: 0,
-              left: movingFromRight ? 'auto' : '0%',
-              right: movingFromRight ? '0%' : 'auto'
-            });
-
-            const completeOnce = (() => {
-              let done = false;
-              return () => {
-                if (done) return;
-                done = true;
-                stopRenderLoop();
-                carLayer.style.opacity = '0';
-                smokeField.innerHTML = '';
-                finalizeRun = null;
-                if (activeTimeline) {
-                  activeTimeline.kill();
-                  activeTimeline = null;
-                }
-                resolve();
-              };
-            })();
-            finalizeRun = completeOnce;
-            let failSafeTimer = setTimeout(() => {
-              completeOnce();
-            }, 3000);
-
-            const tl = gsap.timeline({
-              onComplete: () => {
-                if (failSafeTimer) {
-                  clearTimeout(failSafeTimer);
-                  failSafeTimer = null;
-                }
-                completeOnce(); // carLayer already faded inside timeline
-              },
-              onInterrupt: () => {
-                if (failSafeTimer) {
-                  clearTimeout(failSafeTimer);
-                  failSafeTimer = null;
-                }
-                completeOnce();
-              }
-            });
-            activeTimeline = tl;
-
-            tl.to(carPivot.position, { x: stopX, duration: 0.82, ease: 'power2.out' }, 0);
-            tl.to(trail, { width: '30%', duration: 0.75, ease: 'power2.out' }, 0);
-            tl.to(headLightL, { intensity: 2.2, duration: 0.12, yoyo: true, repeat: 1 }, 0.98);
-            tl.to(headLightR, { intensity: 2.2, duration: 0.12, yoyo: true, repeat: 1 }, 0.98);
-            tl.to(smoke, {
-              opacity: 0.88,
-              scale: 1.7,
-              duration: 0.2,
-              onStart: () => {
-                smoke.style.left = `${smokeBaseX}px`;
-                smoke.style.top = `${smokeBaseY}px`;
-                emitRealisticSmoke(6);
-              }
-            }, 0.8);
-            tl.call(() => emitRealisticSmoke(5), [], 1.0);
-            tl.to(smoke, { opacity: 0.55, scale: 2.2, duration: 0.6, ease: 'none' }, 1.0);
-            tl.to(carPivot.position, { x: exitX, duration: 0.55, ease: 'power3.in' }, 1.05);
-            // ── Original smoke dissipation restored ──
-            // exitX = ±9.0 so car is well off-screen; carLayer stays visible while smoke fades naturally
-            tl.to(smoke, { opacity: 0.07, scale: 3.0, duration: 0.85, ease: 'power2.out' }, 1.55);
-            tl.to(reflection, { opacity: 0, duration: 0.3 }, 1.60);
-            tl.to(trail, { opacity: 0, duration: 0.3 }, 1.60);
-            // Fade carLayer AFTER smoke is near-transparent, then stop render safely
-            tl.to(carLayer, { opacity: 0, duration: 0.28, ease: 'power2.in' }, 2.32);
-            tl.call(() => stopRenderLoop(), [], 2.62);
-          });
-        }
-      });
-    });
-  }
-
-  // World 0: Force car animation on first open by setting instantReveal to false
-  setActiveWorld(0, false);
+  // World 0: Force reveal on first open
+  setActiveWorld(0, true);
 }
 
   // Project Video Modal Logic
