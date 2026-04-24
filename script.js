@@ -866,50 +866,7 @@ function initProjectsExperience() {
     });
   }
 
-  // Fullscreen cinematic video modal.
-  function openModal(videoEl, title) {
-    if (!modal || !modalPlayer) return;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    modalPlayer.src = videoEl.currentSrc || videoEl.src;
-    modalPlayer.currentTime = videoEl.currentTime || 0;
-    modalPlayer.play().catch(() => {});
-    modalTitle.textContent = title;
-  }
-
-  function closeModal() {
-    if (!modal || !modalPlayer) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    modalPlayer.pause();
-    modalPlayer.removeAttribute('src');
-    modalPlayer.load();
-  }
-
-  mediaCards.forEach((media) => {
-    const video = media.querySelector('video');
-    if (!video) return;
-    media.addEventListener('click', () => {
-      openModal(video, media.dataset.videoTitle || 'Project Showcase');
-    });
-  });
-
-  projectCtas.forEach((cta) => {
-    const portal = cta.closest('.project-portal');
-    const video = portal?.querySelector('.project-media video');
-    const title = portal?.querySelector('.project-media')?.dataset.videoTitle || 'Project Showcase';
-    cta.addEventListener('click', () => {
-      if (video) openModal(video, title);
-    });
-  });
-
-  modalClose?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => {
-    if (e.target.classList.contains('video-modal-backdrop')) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal();
-  });
+  // (Video modal logic has been moved and updated to support YouTube iframes at the bottom of the script)
 
   // Custom cursor glow for project section.
   if (!isMobile) {
@@ -1201,24 +1158,25 @@ function initProjectsExperience() {
 
   // Project Video Modal Logic
   const videoModal = document.getElementById('project-video-modal');
-  const modalVideo = document.getElementById('modal-main-video');
+  const modalContainer = document.getElementById('modal-video-container');
   const modalTitle = document.getElementById('modal-video-title');
   const modalClose = videoModal?.querySelector('.video-modal-close');
 
-  const openVideoModal = (src, title) => {
-    if (!videoModal || !modalVideo) return;
-    modalVideo.src = src;
+  const openVideoModal = (youtubeId, title) => {
+    if (!videoModal || !modalContainer) return;
+    
+    // Inject YouTube iframe for playback
+    modalContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
+    
     if (modalTitle) modalTitle.textContent = title;
     videoModal.classList.add('open');
-    modalVideo.play();
     document.body.style.overflow = 'hidden'; // Prevent scrolling
   };
 
   const closeVideoModal = () => {
-    if (!videoModal || !modalVideo) return;
+    if (!videoModal || !modalContainer) return;
     videoModal.classList.remove('open');
-    modalVideo.pause();
-    modalVideo.src = ""; // Clear src to stop loading
+    modalContainer.innerHTML = ''; // Clear iframe to stop audio
     document.body.style.overflow = ''; 
   };
 
@@ -1226,11 +1184,11 @@ function initProjectsExperience() {
   document.querySelectorAll('.project-portal').forEach(portal => {
     const media = portal.querySelector('.project-media');
     const btn = portal.querySelector('[data-video-open]');
-    const video = media?.querySelector('video');
+    const youtubeId = media?.dataset.youtubeId;
     const title = media?.dataset.videoTitle || "Project Gameplay";
 
     const triggerOpen = () => {
-      if (video) openVideoModal(video.src, title);
+      if (youtubeId) openVideoModal(youtubeId, title);
     };
 
     media?.addEventListener('click', triggerOpen);
