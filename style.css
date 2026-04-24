@@ -1781,6 +1781,8 @@ body.nav-open {
   transition: filter 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
   border-radius: 20px;
   overflow: hidden;
+  will-change: transform, filter;
+  contain: layout style;
 }
 
 .project-portal::before {
@@ -1799,7 +1801,7 @@ body.nav-open {
 }
 
 .project-portal.dimmed {
-  filter: brightness(0.72) saturate(0.92);
+  filter: brightness(0.72) saturate(0.9);
 }
 
 .project-world-bg {
@@ -1847,15 +1849,16 @@ body.nav-open {
 .project-portal:not(.content-visible) .project-content {
   opacity: 0;
   transform: translateY(26px) scale(0.98);
-  filter: blur(8px);
+  filter: blur(6px);
   pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
 }
 
 .project-portal.content-visible .project-content {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
-  transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease;
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
 }
 
 .project-content.reverse {
@@ -3350,34 +3353,76 @@ body.nav-open {
   .projects-camera-stage {
     position: relative;
     top: auto;
-    padding: 120px 1rem 70px;
+    padding: 80px 0.75rem 50px;
   }
 
   .projects-worlds {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.5rem;
   }
 
   .project-portal {
     position: relative;
-    opacity: 1;
+    opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+    will-change: auto;
   }
 
+  /* Always show content on mobile — no car animation gating */
+  .project-portal:not(.content-visible) .project-content,
+  .project-portal.content-visible .project-content {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+
+  /* Stack video + copy vertically, video on top */
   .project-content,
   .project-content.reverse {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto;
     min-height: auto;
-    padding: 1.2rem;
+    padding: 1rem;
+    gap: 1rem;
   }
 
-  .projects-micro-stats {
-    justify-content: flex-start;
+  /* Ensure video always comes first on mobile */
+  .project-content .project-media {
+    order: -1;
+  }
+  .project-content.reverse .project-media {
+    order: -1;
+  }
+
+  .project-media {
+    transform: none !important;
+    border-radius: 10px;
   }
 
   .project-media video {
-    min-height: 220px;
+    min-height: 200px;
+    max-height: 240px;
+  }
+
+  .project-copy {
+    transform: none !important;
+  }
+
+  .project-name {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+  }
+
+  .projects-micro-stats {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .project-car-layer,
@@ -5702,4 +5747,56 @@ a, button, .arc-card, .project-media {
 /* Re-enable pointer events for UI */
 #ui-root {
   pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE PERFORMANCE: DISABLE EXPENSIVE GPU EFFECTS
+   backdrop-filter blur is the #1 cause of mobile scroll lag
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 991px) {
+  /* Kill backdrop-filter on ALL elements — huge GPU savings on mobile */
+  .project-content,
+  .video-modal-panel,
+  .video-modal-backdrop,
+  .arc-modal-content,
+  .certificate-modal-backdrop,
+  .nav-inner,
+  .soft-card,
+  .edu-overview-card,
+  .arc-card-inner,
+  .certifications-bg,
+  .certificate-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Pause aurora + fog animations when on mobile to reduce paint */
+  .projects-aurora,
+  .projects-fog,
+  .projects-shimmer-grid {
+    animation: none !important;
+    display: none !important;
+  }
+
+  /* Reduce particles on mobile — JS already caps at 28 but CSS can help */
+  #projects-particles {
+    display: none !important;
+  }
+
+  /* Disable glitch effect on mobile (repaints every frame) */
+  .glitch-text::before,
+  .glitch-text::after {
+    display: none !important;
+  }
+
+  /* Disable depth layer grids on mobile */
+  .projects-depth-layer {
+    display: none !important;
+  }
+
+  /* Simplify project content background on mobile */
+  .project-content {
+    background: rgba(15, 23, 42, 0.9) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  }
 }

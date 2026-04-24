@@ -226,29 +226,30 @@ function createDust() {
 ════════════════════════════════════════════════════════════════ */
 const bgElem = document.getElementById('parallax-bg');
 
+let heroVisible = true;
+const heroObserver = new IntersectionObserver(
+    (entries) => { heroVisible = entries[0].isIntersecting; },
+    { threshold: 0.01 }
+);
+const heroSection = document.getElementById('hero-section');
+if (heroSection) heroObserver.observe(heroSection);
+
 function animate() {
     requestAnimationFrame(animate);
+    if (!heroVisible) return; // skip render when off-screen — huge perf win
     const dt = clock.getDelta();
     Object.values(mixers).forEach(m => m && m.update(dt));
-    
     if (models.idle && models.idle.visible) models.idle.rotation.y += 0.003;
-    
-    // Animate atmospheric dust
     if (dustParticles) {
         dustParticles.rotation.y += 0.001;
         dustParticles.rotation.x += 0.0005;
     }
-
-    // Smooth parallax interpolation for background
     currentBgX += (targetMouseX - currentBgX) * 0.05;
     currentBgY += (targetMouseY - currentBgY) * 0.05;
-    
     if (bgElem) {
         const scrollY = window.scrollY;
-        // Combine mouse movement and scroll depth, adding a slight scale to hide edges
         bgElem.style.transform = `translate3d(${-currentBgX}px, calc(${-scrollY * 0.4}px + ${-currentBgY}px), 0) scale(1.05)`;
     }
-    
     renderer.render(scene, camera);
 }
 
@@ -944,11 +945,11 @@ function initProjectsExperience() {
 
       if (!carCanvas || !carLayer || !trail || !smokeField || !smoke || !reflection) return;
 
-      const carRenderer = new THREE.WebGLRenderer({ canvas: carCanvas, antialias: false, alpha: true });
+      const carRenderer = new THREE.WebGLRenderer({ canvas: carCanvas, antialias: false, alpha: true, powerPreference: 'low-power' });
       const carScene = new THREE.Scene();
       const carCamera = new THREE.PerspectiveCamera(45, carCanvas.clientWidth / carCanvas.clientHeight, 0.1, 100);
       carCamera.position.set(0, 1.3, 5.8);
-      carRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+      carRenderer.setPixelRatio(1); // fixed 1x — best perf for a thumbnail-size canvas
       carRenderer.setSize(carCanvas.clientWidth || window.innerWidth, carCanvas.clientHeight || window.innerHeight);
 
       const carAmbient = new THREE.AmbientLight(0xffffff, 0.45);

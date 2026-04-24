@@ -1,5 +1,7 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.fbx filter=lfs diff=lfs merge=lfs -text
-*.glb filter=lfs diff=lfs merge=lfs -text
+# Git LFS removed for mp4/glb — GitHub Pages cannot serve LFS files.
+# Large files are committed as regular git objects so GitHub Pages can serve them directly.
+# *.zip files remain in LFS (not served by Pages).
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
+video/Legacy_Of_Dharma_Prototype_Explanation.mp4 filter=lfs diff=lfs merge=lfs -text
+video/The[[:space:]]Secret[[:space:]]Book[[:space:]]Trailer.mp4 filter=lfs diff=lfs merge=lfs -text
