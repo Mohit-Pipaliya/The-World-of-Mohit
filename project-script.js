@@ -121,8 +121,8 @@ function initProjectsExperience() {
   portals.forEach((portal, idx) => {
     ScrollTrigger.create({
       trigger: portal,
-      start: 'top 65%',
-      end: 'bottom 35%',
+      start: isMobile ? 'top 80%' : 'top 65%',
+      end: isMobile ? 'bottom 20%' : 'bottom 35%',
       onEnter: () => setActiveWorld(idx),
       onEnterBack: () => setActiveWorld(idx)
     });

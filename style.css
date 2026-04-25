@@ -3718,7 +3718,7 @@ body.nav-open {
   .projects-camera-stage {
     position: relative;
     top: auto;
-    padding: 80px 0.75rem 50px;
+    padding: 60px 1.2rem 40px; /* Improved padding */
   }
 
   .projects-worlds {
@@ -3727,15 +3727,27 @@ body.nav-open {
     gap: 1.5rem;
   }
 
+  .projects-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: 0.12em; /* Reduced for mobile */
+  }
+
   /* Keep unified experience on mobile */
   .project-portal {
     will-change: transform, opacity;
+    opacity: 1 !important; /* Ensure visibility on mobile */
   }
 
   .project-portal:not(.active) .project-content {
-    opacity: 0.4;
-    filter: brightness(0.5);
-    transform: scale(0.95);
+    opacity: 1; /* Was 0.4, making it too dark */
+    filter: brightness(0.8); /* Slight dimming instead of 0.5 */
+    transform: none;
+  }
+
+  .project-portal.active .project-content {
+    opacity: 1;
+    filter: brightness(1.1);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
   }
 
 
@@ -3749,6 +3761,7 @@ body.nav-open {
   .project-media {
     transform: none !important;
     border-radius: 10px;
+    order: -1; /* Always on top on mobile */
   }
 
   .project-copy {
