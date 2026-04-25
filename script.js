@@ -322,6 +322,11 @@ async function boot() {
         opacity: 1, y: 0, duration: 1.5, ease: 'back.out(1.7)'
     }, 8.0);
 
+    // 8.5: Background Reveal (After all text is visible)
+    tl.to('#parallax-bg', {
+        opacity: 1, duration: 2.0, ease: 'power2.out'
+    }, 8.2);
+
     // 9: Navbar drop
     tl.to('#top-nav', {
         y: 0, opacity: 1, duration: 1.5, ease: 'expo.out'

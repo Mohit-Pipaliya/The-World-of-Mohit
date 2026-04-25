@@ -265,10 +265,19 @@ body {
 .g-PS { color: #94a3b8; font-weight: 800; }
 
 @media(max-width: 900px) {
+  .edu-results-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: 0;
+  }
+
   .results-stage { 
     height: auto; 
     min-height: 400px;
-    padding: 20px;
+    padding: 5px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
   
   .results-panel { 
@@ -277,6 +286,7 @@ body {
     top: 0;
     left: 0;
     transform: none !important;
+    border-radius: 12px;
   }
   
   #panel-container {
@@ -285,15 +295,25 @@ body {
     height: auto;
     top: 0;
     left: 0;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .ms-body {
     max-height: none;
+    padding: 10px 5px;
   }
 
   .ms-table td, .ms-table th {
-    font-size: 0.75rem;
-    padding: 8px;
+    font-size: 0.7rem;
+    padding: 6px 4px;
+  }
+
+  .ms-header, .ms-footer {
+    padding: 15px 10px;
+  }
+
+  .edu-dropdown-wrapper {
+    max-width: 90%;
+    margin-bottom: 2rem;
   }
 }

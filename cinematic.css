@@ -109,11 +109,12 @@ body {
   background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=60&w=1600&auto=format&fit=crop') !important;
   background-attachment: scroll !important;
   /* scroll = GPU composited */
-  filter: brightness(0.3) contrast(1.4) sepia(0.6) hue-rotate(-20deg) saturate(1.5) !important;
+  filter: brightness(0.6) contrast(1.2) sepia(0.3) saturate(1.2) !important;
+  opacity: 0; /* Hidden on load, will be revealed by script.js */
 }
 
 #vignette {
-  background: radial-gradient(circle at center, transparent 10%, rgba(5, 3, 0, 0.95) 100%) !important;
+  background: radial-gradient(circle at center, transparent 30%, rgba(5, 3, 0, 0.75) 100%) !important;
 }
 
 /* ── 6. TYPOGRAPHY ───────────────────────────────────────── */
@@ -155,8 +156,8 @@ h3 {
 /* ── 7. ABOUT ────────────────────────────────────────────── */
 #about {
   background:
-    radial-gradient(circle at 30% 50%, rgba(232, 176, 89, 0.04), transparent 55%),
-    linear-gradient(to bottom, rgba(10, 8, 5, 0.94), rgba(10, 8, 5, 0.88)),
+    radial-gradient(circle at 30% 50%, rgba(232, 176, 89, 0.08), transparent 60%),
+    linear-gradient(to bottom, rgba(10, 8, 5, 0.7), rgba(10, 8, 5, 0.6)),
     url('https://images.unsplash.com/photo-1507692049790-de58290a4334?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
@@ -226,8 +227,8 @@ h3 {
 /* ── 8. TECH SKILLS ──────────────────────────────────────── */
 #tech-skills {
   background:
-    radial-gradient(circle at 50% 80%, rgba(200, 80, 0, 0.08), transparent 65%),
-    linear-gradient(to bottom, rgba(5, 3, 0, 0.94), rgba(15, 10, 5, 0.88)),
+    radial-gradient(circle at 50% 80%, rgba(200, 80, 0, 0.12), transparent 70%),
+    linear-gradient(to bottom, rgba(5, 3, 0, 0.7), rgba(15, 10, 5, 0.6)),
     url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
@@ -276,7 +277,7 @@ h3 {
 /* ── 9. SOFT SKILLS ──────────────────────────────────────── */
 #soft-skills {
   background:
-    linear-gradient(to bottom, rgba(10, 12, 10, 0.88), rgba(5, 8, 5, 0.94)),
+    linear-gradient(to bottom, rgba(10, 12, 10, 0.7), rgba(5, 8, 5, 0.6)),
     url('https://images.unsplash.com/photo-1542300058-849d3b08aa0f?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
@@ -310,7 +311,7 @@ h3 {
 /* ── 10. EDUCATION ───────────────────────────────────────── */
 #education {
   background:
-    linear-gradient(to bottom, rgba(15, 10, 5, 0.88), rgba(5, 3, 0, 0.94)),
+    linear-gradient(to bottom, rgba(15, 10, 5, 0.7), rgba(5, 3, 0, 0.6)),
     url('https://images.unsplash.com/photo-1555985202-12975b0235dc?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
@@ -342,19 +343,25 @@ h3 {
 /* ── 11. PROJECTS ────────────────────────────────────────── */
 #projects {
   background:
-    linear-gradient(to bottom, rgba(5, 3, 0, 0.94), rgba(10, 5, 0, 0.88)),
+    linear-gradient(to bottom, rgba(5, 3, 0, 0.7), rgba(10, 5, 0, 0.6)),
     url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
 .project-portal {
   background: rgba(15, 10, 5, 0.82) !important;
   border: 2px solid #3a2a18 !important;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+  border-left: 2px solid var(--cin-gold) !important;
+  border-right: 2px solid var(--cin-gold) !important;
+  transition: box-shadow 0.3s ease !important;
+  box-shadow: 
+    -5px 0 15px -5px var(--cin-gold),
+    5px 0 15px -5px var(--cin-gold) !important;
 }
 
-.project-portal:hover {
-  border-color: var(--cin-brown) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 32px rgba(232, 176, 89, 0.15) !important;
+.project-portal:hover, .project-portal.active {
+  box-shadow: 
+    -8px 0 25px -5px var(--cin-gold),
+    8px 0 25px -5px var(--cin-gold) !important;
 }
 
 .project-world-bg {
@@ -385,7 +392,7 @@ h3 {
 /* ── 12. ACHIEVEMENTS ────────────────────────────────────── */
 #achievements {
   background:
-    radial-gradient(circle at center, rgba(139, 90, 43, 0.08), rgba(5, 3, 0, 0.95)),
+    radial-gradient(circle at center, rgba(139, 90, 43, 0.12), rgba(5, 3, 0, 0.75)),
     url('https://images.unsplash.com/photo-1606011334315-025e4baab810?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 
@@ -425,7 +432,7 @@ h3 {
 /* ── 13. CERTIFICATES ────────────────────────────────────── */
 #certifications {
   background:
-    linear-gradient(to bottom, rgba(10, 8, 5, 0.94), rgba(20, 15, 10, 0.88)),
+    linear-gradient(to bottom, rgba(10, 8, 5, 0.7), rgba(20, 15, 10, 0.6)),
     url('https://images.unsplash.com/photo-1533158307587-828f0a76ef46?q=60&w=1600&auto=format&fit=crop') center/cover !important;
 }
 

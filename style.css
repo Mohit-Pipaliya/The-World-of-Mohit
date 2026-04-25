@@ -79,8 +79,9 @@ body.nav-open {
   background-image: url('image/Background .jpg');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.7) contrast(1.1);
-  will-change: transform;
+  filter: brightness(0.85) contrast(1.05);
+  opacity: 0; /* Hidden on load for entrance animation */
+  will-change: transform, opacity;
 }
 
 #canvas-container {
@@ -95,7 +96,7 @@ body.nav-open {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: radial-gradient(circle at center, transparent 20%, rgba(5, 10, 20, 0.95) 120%);
+  background: radial-gradient(circle at center, transparent 30%, rgba(5, 10, 20, 0.75) 120%);
   mix-blend-mode: multiply;
 }
 
@@ -1711,16 +1712,24 @@ body.nav-open {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.project-portal:not(.active) .project-content {
-  opacity: 0.85;
-  filter: brightness(0.9);
-  transform: scale(0.99);
+.project-portal .project-content {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  /* Persistent side glow */
+  box-shadow: 
+    -5px 0 15px -5px var(--cyan),
+    5px 0 15px -5px var(--cyan);
+  border-left: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
 }
 
 .project-portal.active .project-content {
-  opacity: 1;
-  filter: brightness(1.1);
-  transform: scale(1);
+  box-shadow: 
+    -8px 0 25px -5px var(--cyan),
+    8px 0 25px -5px var(--cyan);
+  border-left: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
 }
 
 @media (min-width: 900px) {
@@ -1803,18 +1812,18 @@ body.nav-open {
   transform: none;
 }
 
-/* Desktop: Scroll-activation effects */
+/* Desktop: Always fully visible, persistent side glow */
 @media (min-width: 992px) {
   .project-portal:not(.active) .project-content {
-    opacity: 0.6;
-    filter: grayscale(0.5);
-    transform: scale(0.98);
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
   
   .project-portal.active .project-content {
     opacity: 1;
     filter: none;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -3739,15 +3748,21 @@ body.nav-open {
   }
 
   .project-portal:not(.active) .project-content {
-    opacity: 1; /* Was 0.4, making it too dark */
-    filter: brightness(0.8); /* Slight dimming instead of 0.5 */
+    opacity: 1;
+    filter: none;
     transform: none;
+    border-left: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    box-shadow: -5px 0 15px -5px var(--cyan), 5px 0 15px -5px var(--cyan);
   }
 
   .project-portal.active .project-content {
     opacity: 1;
-    filter: brightness(1.1);
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+    filter: none;
+    transform: none;
+    border-left: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    box-shadow: -8px 0 25px -5px var(--cyan), 8px 0 25px -5px var(--cyan);
   }
 
 
