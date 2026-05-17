@@ -1014,24 +1014,32 @@ function initCertificationsExperience() {
   const modalImage = document.getElementById('certificate-modal-image');
 
   // Scroll Reveal for Cards
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top 60%',
-    once: true,
-    onEnter: () => {
-      cards.forEach((card, idx) => {
-        // We use a simple opacity and slight scale/y-axis entrance animation.
-        // The rotation and exact positioning comes from CSS custom properties.
-        gsap.to(card, {
-          opacity: 1,
-          duration: 0.8,
-          delay: idx * 0.1,
-          ease: 'back.out(1.2)',
-          onStart: () => card.classList.add('is-visible')
+  const isMobileView = window.innerWidth <= 768;
+  if (isMobileView) {
+    cards.forEach((card) => {
+      card.style.opacity = '1';
+      card.classList.add('is-visible');
+    });
+  } else {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 60%',
+      once: true,
+      onEnter: () => {
+        cards.forEach((card, idx) => {
+          // We use a simple opacity and slight scale/y-axis entrance animation.
+          // The rotation and exact positioning comes from CSS custom properties.
+          gsap.to(card, {
+            opacity: 1,
+            duration: 0.8,
+            delay: idx * 0.1,
+            ease: 'back.out(1.2)',
+            onStart: () => card.classList.add('is-visible')
+          });
         });
-      });
-    }
-  });
+      }
+    });
+  }
 
   // Modal Functionality
   function openModal(imgSrc, imgAlt) {
