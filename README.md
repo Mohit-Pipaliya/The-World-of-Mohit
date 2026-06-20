@@ -2,7 +2,7 @@
 
 ![Mohit's Portfolio](image/Profile.jpeg)
 
-Welcome to **The World of Mohit**, a cinematic, high-fidelity portfolio showcasing my journey as a **Game Developer & Creator**. 
+Welcome to **The World of Mohit**, a cinematic, high-fidelity portfolio showcasing my journey as a **Game Developer & Designer**. 
 
 ## 🚀 Experience the Journey
 This isn't just a portfolio—it's an interactive experience built with **HTML5, CSS3, and JavaScript**, featuring GSAP animations and 3D elements to bring game development concepts to life.
@@ -19,13 +19,20 @@ This isn't just a portfolio—it's an interactive experience built with **HTML5,
 - **Tools**: VS Code, Blender, Python
 
 ## 🕹 Featured Projects
-### 1. Legacy of Dharma
+### 1. Zatun Zombie Game (The Last Containment)
+**Platform**: PC Game
+- Developed a production-ready Third-Person Zombie Survival Shooter in Unity 6 featuring advanced combat and enemy AI systems.
+- Engineered a hybrid Hitscan-Projectile shooting system with reliable hit detection, weapon handling, and combat feedback.
+- Implemented IK-driven procedural animation rigging for realistic weapon aiming, head tracking, and character interactions.
+**Video Link**: [Watch Gameplay](https://youtu.be/0DIiAiJlnj0?si=nljzvg1bgb2vwhs-)
+
+### 2. Legacy of Dharma
 A story-driven mythology adventure where players guide Deva through sacred lands and battle an Asura in a cinematic showdown.
 
-### 2. The Secret Book
+### 3. The Secret Book
 A mystery adventure puzzle game where players solve logic-driven challenges in an atmospheric journey.
 
-### 3. Swadeshi UnderDogs
+### 4. Swadeshi UnderDogs
 A market-themed exploration experience focusing on local trade and educational progression.
 
 ## 📬 Connect with Me
