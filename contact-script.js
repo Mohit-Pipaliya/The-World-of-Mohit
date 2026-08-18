@@ -7,7 +7,6 @@
   const gameView      = document.getElementById('contact-game-view');
   const detailsView   = document.getElementById('contact-details-view');
   const btnPlay       = document.getElementById('btn-play-game');
-  const btnSkip       = document.getElementById('btn-skip-game');
   const btnPlayAgain  = document.getElementById('btn-play-again');
   const btnGameClose  = document.getElementById('btn-game-close');   /* ✖ in-game close */
   const btnGameSkip   = document.getElementById('btn-game-skip');    /* ⏭ in-game skip  */
@@ -194,12 +193,15 @@
       }, 200 + i * 120);
     });
 
-    // Show toggle button instead of form directly
-    const toggleBtn = document.getElementById('btn-toggle-feedback');
-    if (toggleBtn) {
+    // Show form directly after cards animate in
+    const formWrap = document.getElementById('feedback-form-wrap');
+    if (formWrap) {
       setTimeout(() => {
-        fadeIn(toggleBtn, 0.5);
-      }, 200 + cards.length * 120 + 200);
+        formWrap.style.display = 'block';
+        requestAnimationFrame(() => {
+          formWrap.classList.add('show');
+        });
+      }, 200 + cards.length * 120);
     }
   }
 
@@ -239,6 +241,13 @@
     avatar.style.pointerEvents = 'auto';
     winMsg.classList.remove('show');
 
+    // Reset form visibility if playing again
+    const formWrap = document.getElementById('feedback-form-wrap');
+    if (formWrap) {
+      formWrap.classList.remove('show');
+      formWrap.style.display = 'none';
+    }
+
     fadeOut(initialView, 0.35, () => {
       fadeIn(gameView, 0.5, () => {
         /* place avatar in centre, then start moving */
@@ -255,14 +264,6 @@
     running = false;
     clearTimeout(moveTimer);
     avatar.style.pointerEvents = 'none';
-  }
-
-  /* ─── SKIP (initial prompt → contact info) ─── */
-  function skipToContact() {
-    fadeOut(initialView, 0.35, () => {
-      fadeIn(detailsView, 0.6);
-      animateContactCards();
-    });
   }
 
   /* ─── CLOSE GAME ✖ (stop + exit to contact info) ─── */
@@ -296,24 +297,19 @@
 
   /* ─── EVENT BINDINGS ─── */
   btnPlay.addEventListener('click',      startGame);
-  btnSkip.addEventListener('click',      skipToContact);    /* initial prompt skip */
   btnPlayAgain.addEventListener('click', playAgain);
   btnGameClose.addEventListener('click', closeGame);        /* ✖ in-game close */
   btnGameSkip.addEventListener('click',  inGameSkip);       /* ⏭ in-game skip  */
 
   /* ─── FEEDBACK TOGGLE ─── */
   const btnToggleFeedback = document.getElementById('btn-toggle-feedback');
-  const formWrap = document.getElementById('feedback-form-wrap');
-  if (btnToggleFeedback && formWrap) {
+  if (btnToggleFeedback) {
     btnToggleFeedback.addEventListener('click', () => {
-      // Hide button
-      fadeOut(btnToggleFeedback, 0.3, () => {
-        // Show form
-        formWrap.style.display = 'block';
-        // Give slight delay for display block to register before animating class
-        requestAnimationFrame(() => {
-          formWrap.classList.add('show');
-        });
+      // Transition from initial view to details view
+      // The form will be shown automatically by animateContactCards()
+      fadeOut(initialView, 0.35, () => {
+        fadeIn(detailsView, 0.6);
+        animateContactCards();
       });
     });
   }
@@ -328,23 +324,56 @@
       
       const btnText = btnSubmitFeedback.querySelector('.btn-text');
       
-      // Simulate sending state
+      // Update button state to sending
       btnText.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
       btnSubmitFeedback.style.pointerEvents = 'none';
 
-      // Simulate network request delay
-      setTimeout(() => {
+      // Gather form data with AAA Game Style terminology (Emojis & Gaming terms)
+      const formData = {
+        "🎮 Player Name": document.getElementById('fb-name').value,
+        "📧 Comm-Link (Email)": document.getElementById('fb-email').value,
+        "🎯 Mission Objective": document.getElementById('fb-reason').value,
+        "💬 Encrypted Transmission": document.getElementById('fb-message').value,
+        _subject: "🚀 NEW MISSION ALERT: The World of Mohit",
+        _captcha: "false", // Disable captcha for seamless AJAX submission
+        _template: "box", // Use the 'box' template which keeps a dark mode vibe
+      };
+
+      // Add reply-to so you can directly reply to the user's email
+      formData["_replyto"] = document.getElementById('fb-email').value;
+
+      // Send data to formsubmit.co via AJAX
+      fetch("https://formsubmit.co/ajax/mohitpipaliya248@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
         btnSubmitFeedback.classList.add('success');
         btnText.innerHTML = 'Message Sent ✅';
         
-        // Optionally reset form after some time
+        // Reset form after some time
         setTimeout(() => {
           feedbackForm.reset();
           btnSubmitFeedback.classList.remove('success');
           btnText.innerHTML = 'Send Message <i class="fa-regular fa-paper-plane"></i>';
           btnSubmitFeedback.style.pointerEvents = 'auto';
         }, 3000);
-      }, 1500);
+      })
+      .catch(error => {
+        console.error("Error submitting form:", error);
+        btnText.innerHTML = 'Error ❌';
+        
+        // Reset button on error
+        setTimeout(() => {
+          btnText.innerHTML = 'Send Message <i class="fa-regular fa-paper-plane"></i>';
+          btnSubmitFeedback.style.pointerEvents = 'auto';
+        }, 3000);
+      });
     });
   }
 
