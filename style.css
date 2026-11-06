@@ -1781,6 +1781,12 @@ body.nav-open {
     linear-gradient(to top, rgba(34, 14, 52, 0.72), rgba(8, 13, 30, 0.95));
 }
 
+.zombie-bg {
+  background:
+    radial-gradient(circle at 75% 25%, rgba(16, 185, 129, 0.12), transparent 35%),
+    linear-gradient(to top, rgba(15, 23, 42, 0.75), rgba(6, 10, 20, 0.96));
+}
+
 .project-content {
   position: relative;
   z-index: 1;

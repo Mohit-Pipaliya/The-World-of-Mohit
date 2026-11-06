@@ -19,20 +19,32 @@ This isn't just a portfolio—it's an interactive experience built with **HTML5,
 - **Tools**: VS Code, Blender, Python
 
 ## 🕹 Featured Projects
-### 1. Zatun Zombie Game (The Last Containment)
+### 1. Andhkaar – Trial of the Yodha (Extended Gameplay)
+**Platform**: Unity 3D (URP)
+- A 3D action-adventure game inspired by Indian mythology.
+- Explore cursed temples, solve light-based puzzles, collect sacred relics, and defeat powerful Asuras to restore divine light and overcome the darkness.
+**Video Link**: [Watch Gameplay](https://youtu.be/3bGbAK-JRAc)
+
+### 2. Andhkaar – Trial of the Yodha
+**Platform**: Unity 3D (URP)
+- A 3D action-adventure game inspired by Indian mythology.
+- Explore cursed temples, solve light-based puzzles, collect sacred relics, and defeat powerful Asuras to restore divine light and overcome the darkness.
+**Video Link**: [Watch Gameplay](https://youtu.be/mvSSiDMII5g?si=84DJsaPPTD4ZM8nR)
+
+### 3. Zatun Zombie Game (The Last Containment)
 **Platform**: PC Game
 - Developed a production-ready Third-Person Zombie Survival Shooter in Unity 6 featuring advanced combat and enemy AI systems.
 - Engineered a hybrid Hitscan-Projectile shooting system with reliable hit detection, weapon handling, and combat feedback.
 - Implemented IK-driven procedural animation rigging for realistic weapon aiming, head tracking, and character interactions.
 **Video Link**: [Watch Gameplay](https://youtu.be/0DIiAiJlnj0?si=nljzvg1bgb2vwhs-)
 
-### 2. Legacy of Dharma
+### 4. Legacy of Dharma
 A story-driven mythology adventure where players guide Deva through sacred lands and battle an Asura in a cinematic showdown.
 
-### 3. The Secret Book
+### 5. The Secret Book
 A mystery adventure puzzle game where players solve logic-driven challenges in an atmospheric journey.
 
-### 4. Swadeshi UnderDogs
+### 6. Swadeshi UnderDogs
 A market-themed exploration experience focusing on local trade and educational progression.
 
 ## 📬 Connect with Me
